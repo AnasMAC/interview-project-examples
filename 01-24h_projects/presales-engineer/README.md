@@ -15,7 +15,7 @@ Assign **one** package per candidate. The candidate receives an invitation email
 | [09 — Answer a trial's technical questions and keep the FAQ current](09-trial-technical-qa-desk/README.md) | Technical Q&A, escalation, FAQ maintenance and product feedback | Answer check rerun after release notes |
 | [10 — Build an executive demo on honest risk trends](10-executive-risk-demo/README.md) | Business demo storyline, trend metrics from trial results, assurance limits | Metric method rerun on a partial next scan |
 
-This bank is used for both the Pre-Sales Engineer and the Pre-Sales Engineer Intern roles. The packages expect working application security knowledge (static vs dynamic analysis, common web and mobile vulnerability classes, false positives, authenticated scanning) and familiarity with CI/CD configuration. No package requires programming: scripts are always optional and earn no extra marks. Reading JSON, YAML and CSV is a baseline skill.
+This bank is used for the Pre-Sales Engineer role. The packages expect working application security knowledge (static vs dynamic analysis, common web and mobile vulnerability classes, false positives, authenticated scanning) and familiarity with CI/CD configuration. No package requires programming: scripts are always optional and earn no extra marks. Reading JSON, YAML and CSV is a baseline skill.
 
 All companies, people, product features, prices and events are fictional assessment facts, including the vendor Lantern. Supplied fixtures are authoritative. No real outreach, scanning, accounts, purchases or production systems are involved. Free spreadsheets and text editors are sufficient; candidates may use their own AI tools.
 
