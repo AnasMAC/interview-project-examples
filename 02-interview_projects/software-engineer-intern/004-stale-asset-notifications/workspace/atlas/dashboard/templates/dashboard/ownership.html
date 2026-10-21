@@ -1,0 +1,33 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Ownership rules{% endblock %}
+{% block content %}
+<h1>Ownership rules</h1>
+<section class="explainer" aria-labelledby="precedence-title">
+  <h2 id="precedence-title">How an owner is chosen</h2>
+  <ol>
+    <li>Enabled rules are tried in order of <strong>priority</strong> (lower first); rules with the same priority go oldest first.</li>
+    <li>The <strong>first</strong> matching rule sets the owner team. A more specific pattern further down does not override it.</li>
+    <li><code>hostname</code> patterns are shell globs on host and domain keys; <code>*</code> also matches dots, so <code>*.{{ org.domain }}</code> covers every subdomain level.</li>
+    <li><code>cidr</code> matches IP assets inside the network and networks contained in it; <code>tag</code> matches assets carrying the tag.</li>
+    <li>Owners set by hand are <strong>locked</strong> and never changed by rules. An asset that matches no rule becomes unowned.</li>
+  </ol>
+  <p class="muted">
+    <a href="{% url 'dashboard:asset-list' %}?owner=-">{{ unowned }} live asset{{ unowned|pluralize }} unowned</a>,
+    {{ locked }} with a locked owner. Rules are managed through the API (<code>/api/v1/ownership-rules/</code>).
+  </p>
+</section>
+<table>
+  <thead><tr><th scope="col">Order</th><th scope="col">Priority</th><th scope="col">Type</th><th scope="col">Pattern</th><th scope="col">Team</th><th scope="col">Status</th></tr></thead>
+  <tbody>
+  {% for rule in rules %}
+    <tr{% if not rule.enabled %} class="archived"{% endif %}>
+      <td class="num">{{ forloop.counter }}</td><td class="num">{{ rule.priority }}</td>
+      <td>{{ rule.get_pattern_type_display }}</td><td class="mono">{{ rule.pattern }}</td>
+      <td><a href="{% url 'dashboard:asset-list' %}?owner={{ rule.team|urlencode }}">{{ rule.team }}</a></td>
+      <td>{% if rule.enabled %}enabled{% else %}disabled (skipped){% endif %}</td>
+    </tr>
+  {% empty %}<tr><td colspan="6" class="muted">No ownership rules yet.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

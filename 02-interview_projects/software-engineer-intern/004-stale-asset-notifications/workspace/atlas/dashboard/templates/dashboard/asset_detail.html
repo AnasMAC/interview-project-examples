@@ -1,0 +1,94 @@
+{% extends "dashboard/base.html" %}
+{% block title %}{{ asset.label|default:asset.key }}{% endblock %}
+{% block content %}
+<p class="crumbs"><a href="{% url 'dashboard:asset-list' %}">Assets</a> / {{ asset.get_kind_display }}</p>
+<h1>{{ asset.label|default:asset.key }}</h1>
+{% if asset.archived_at %}<p class="notice">Archived on {{ asset.archived_at|date:"Y-m-d H:i" }}.</p>{% endif %}
+
+<dl class="facts">
+  <dt>Key</dt><dd class="mono">{{ asset.key }}</dd>
+  <dt>Owner</dt><dd>{{ asset.owner_team|default:"Unowned" }}{% if asset.owner_locked %} <span class="badge">locked by hand</span>{% endif %}</dd>
+  <dt>Tags</dt><dd>{% for tag in asset.tags.all %}<a class="tag" href="{% url 'dashboard:asset-list' %}?tag={{ tag.name|urlencode }}">{{ tag.name }}</a> {% empty %}—{% endfor %}</dd>
+  <dt>First seen</dt><dd>{{ asset.first_seen_at|date:"Y-m-d H:i T" }}</dd>
+  <dt>Last seen</dt><dd>{{ asset.last_seen_at|date:"Y-m-d H:i T" }}</dd>
+</dl>
+
+<h2>Attributes</h2>
+<pre class="attributes">{{ attributes_json }}</pre>
+
+<h2>Sources</h2>
+<p class="muted">The label and attributes come from the most recently seen source (marked).</p>
+<table>
+  <thead><tr><th scope="col">Kind</th><th scope="col">Source</th><th scope="col">External id</th><th scope="col">First seen</th><th scope="col">Last seen</th></tr></thead>
+  <tbody>
+  {% for source in sources %}
+    <tr><td>{{ source.get_source_kind_display }}</td>
+      <td>{{ source.source_name }}{% if forloop.first %} <span class="badge">label source</span>{% endif %}</td>
+      <td class="mono">{{ source.external_id|default:"—" }}</td>
+      <td>{{ source.first_seen_at|date:"Y-m-d H:i" }}</td><td>{{ source.last_seen_at|date:"Y-m-d H:i" }}</td></tr>
+  {% empty %}<tr><td colspan="5" class="muted">No sources recorded.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<h2>Links</h2>
+<table>
+  <thead><tr><th scope="col">Direction</th><th scope="col">Relation</th><th scope="col">Asset</th><th scope="col">Last seen</th></tr></thead>
+  <tbody>
+  {% for link in links_out %}
+    <tr><td>to</td><td>{{ link.get_relation_display }}</td>
+      <td><a href="{% url 'dashboard:asset-detail' link.target_id %}">{{ link.target.label|default:link.target.key }}</a></td>
+      <td>{{ link.last_seen_at|date:"Y-m-d H:i" }}</td></tr>
+  {% endfor %}
+  {% for link in links_in %}
+    <tr><td>from</td><td>{{ link.get_relation_display }}</td>
+      <td><a href="{% url 'dashboard:asset-detail' link.asset_id %}">{{ link.asset.label|default:link.asset.key }}</a></td>
+      <td>{{ link.last_seen_at|date:"Y-m-d H:i" }}</td></tr>
+  {% endfor %}
+  {% if not links_out and not links_in %}<tr><td colspan="4" class="muted">No links.</td></tr>{% endif %}
+  </tbody>
+</table>
+
+<h2>Services</h2>
+<table>
+  <thead><tr><th scope="col">Port</th><th scope="col">Service</th><th scope="col">Product</th><th scope="col">Banner</th><th scope="col">State</th></tr></thead>
+  <tbody>
+  {% for service in services %}
+    <tr{% if service.closed_at %} class="archived"{% endif %}><td class="mono">{{ service.port }}/{{ service.protocol }}</td>
+      <td>{{ service.service|default:"—" }}</td><td>{{ service.product|default:"—" }}</td>
+      <td class="mono">{{ service.banner|truncatechars:80 }}</td>
+      <td>{% if service.closed_at %}closed {{ service.closed_at|date:"Y-m-d" }}{% else %}open{% endif %}</td></tr>
+  {% empty %}<tr><td colspan="5" class="muted">No services seen.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<h2>Exposures</h2>
+<table>
+  <thead><tr><th scope="col">Severity</th><th scope="col">Title</th><th scope="col">Rule</th><th scope="col">Status</th><th scope="col">Opened</th></tr></thead>
+  <tbody>
+  {% for exposure in exposures %}
+    <tr><td><span class="sev sev-{{ exposure.severity }}">{{ exposure.get_severity_display }}</span></td>
+      <td>{{ exposure.title }}</td><td>{{ exposure.get_rule_display }}</td>
+      <td>{{ exposure.status }}{% if exposure.resolved_at %} {{ exposure.resolved_at|date:"Y-m-d" }}{% endif %}</td>
+      <td>{{ exposure.opened_at|date:"Y-m-d H:i" }}</td></tr>
+  {% empty %}<tr><td colspan="5" class="muted">No exposures.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<h2>Change history</h2>
+{% if changes|length == history_limit %}<p class="muted">Showing the latest {{ history_limit }} changes.</p>{% endif %}
+<table>
+  <thead><tr><th scope="col">When</th><th scope="col">Change</th><th scope="col">Field</th><th scope="col">Old</th><th scope="col">New</th><th scope="col">Source</th></tr></thead>
+  <tbody>
+  {% for change in changes %}
+    <tr><td>{{ change.occurred_at|date:"Y-m-d H:i" }}</td><td>{{ change.get_kind_display }}</td>
+      <td class="mono">{{ change.field }}</td>
+      <td class="mono">{{ change.old_display|truncatechars:120 }}</td><td class="mono">{{ change.new_display|truncatechars:120 }}</td>
+      <td>{{ change.source_kind|default:"—" }}{% if change.job_id %} (job {{ change.job_id }}){% endif %}</td></tr>
+  {% empty %}<tr><td colspan="6" class="muted">No changes recorded.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

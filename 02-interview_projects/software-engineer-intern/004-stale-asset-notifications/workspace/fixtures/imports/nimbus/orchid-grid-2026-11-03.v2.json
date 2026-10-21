@@ -1,0 +1,28 @@
+{
+  "schema": "nimbus.inventory/v2",
+  "generatedAt": "2026-11-03T18:30:00Z",
+  "account": {"id": "acct-2m8x4c1pzq", "displayName": "orchid-grid-ops"},
+  "items": [
+    {
+      "resourceId": "i-07e1b2c9", "resourceType": "compute/instance", "displayName": "og-portal-01",
+      "location": "ap-southeast-4", "lifecycle": "ACTIVE",
+      "addresses": [
+        {"ip": "203.0.113.70", "scope": "public"},
+        {"ip": "2001:0db8:06f1:0000:0000:0000:0000:0070", "scope": "public"},
+        {"ip": "10.40.1.10", "scope": "private"}
+      ],
+      "endpoints": ["portal.orchid-grid.example.test", "outage-map.orchid-grid.example.test"]
+    },
+    {
+      "resourceId": "i-07e1b3f4", "resourceType": "compute/instance", "displayName": "gridline-gw-akl-01",
+      "location": "ap-southeast-4", "lifecycle": "ACTIVE",
+      "addresses": [{"ip": "203.0.113.77", "scope": "public"}, {"ip": "2001:db8:6f1::77", "scope": "public"}],
+      "endpoints": ["gw.orchid-grid.example.test"]
+    },
+    {
+      "resourceId": "db-og-meter-reads", "resourceType": "database/postgres", "displayName": "og-meter-reads",
+      "location": "ap-southeast-4", "lifecycle": "ACTIVE",
+      "addresses": [{"ip": "10.40.2.5", "scope": "private"}], "endpoints": []
+    }
+  ]
+}

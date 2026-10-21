@@ -1,0 +1,49 @@
+{% load static tz %}<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Atlas{% endblock %} · Atlas</title>
+  <link rel="stylesheet" href="{% static 'dashboard/atlas.css' %}">
+  <script src="{% static 'dashboard/atlas.js' %}" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="{% url 'dashboard:home' %}">Atlas</a>
+  {% if org %}
+  {% with current=request.resolver_match.url_name %}
+  <nav aria-label="Main">
+    <a href="{% url 'dashboard:asset-list' %}"{% if current == 'asset-list' or current == 'asset-detail' %} aria-current="page"{% endif %}>Assets</a>
+    <a href="{% url 'dashboard:exposures' %}"{% if current == 'exposures' %} aria-current="page"{% endif %}>Exposures</a>
+    <a href="{% url 'dashboard:ownership' %}"{% if current == 'ownership' %} aria-current="page"{% endif %}>Ownership</a>
+  </nav>
+  {% endwith %}
+  {% if orgs|length > 1 %}
+  <form class="org-switch" method="get" action="{% url 'dashboard:asset-list' %}">
+    <label for="org-switch">Organisation</label>
+    <select id="org-switch" name="org" data-autosubmit>
+      {% for o in orgs %}<option value="{{ o.slug }}"{% if o == org %} selected{% endif %}>{{ o.name }}</option>{% endfor %}
+    </select>
+    <button type="submit" class="js-hidden">Switch</button>
+  </form>
+  {% else %}
+  <span class="org-name">{{ org.name }}</span>
+  {% endif %}
+  {% endif %}
+  {% if user.is_authenticated %}
+  <form class="logout" method="post" action="{% url 'logout' %}">
+    {% csrf_token %}<button type="submit">Log out {{ user.get_username }}</button>
+  </form>
+  {% endif %}
+</header>
+<main id="main" tabindex="-1">
+  {% if messages %}
+  <ul class="messages" role="status">
+    {% for message in messages %}<li class="message-{{ message.tags }}">{{ message }}</li>{% endfor %}
+  </ul>
+  {% endif %}
+  {% timezone org.timezone|default:"UTC" %}{% block content %}{% endblock %}{% endtimezone %}
+</main>
+</body>
+</html>

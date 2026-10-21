@@ -1,0 +1,26 @@
+# Virtualenv and Python noise
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Test and tool caches
+.pytest_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Local environment (never commit a real one)
+.env
+
+# Generated data: attachment root, mockhook log, smoke output, parse cache
+var/
+spool/.cache/
+
+# Failed spool items include an .error.txt beside them and are moved back by
+# hand (see docs/runbook.md); the directory itself stays.
+spool/failed/*
+!spool/failed/.gitkeep

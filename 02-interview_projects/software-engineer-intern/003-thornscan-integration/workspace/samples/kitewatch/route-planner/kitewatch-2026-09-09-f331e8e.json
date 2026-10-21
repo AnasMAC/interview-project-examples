@@ -1,0 +1,74 @@
+{
+  "schema": "https://schemas.kitewatch.example.test/report/v3.json",
+  "scanner": {
+    "name": "Kitewatch",
+    "version": "3.2.1"
+  },
+  "scan": {
+    "target": "https://route-planner.staging.fernwick.example.test",
+    "started": "2026-09-09T09:20:00Z",
+    "profile": "ci-baseline"
+  },
+  "findings": [
+    {
+      "id": "f-f98ef049",
+      "rule": "KW-PATH-008",
+      "title": "Path traversal",
+      "severity": "High",
+      "confidence": "firm",
+      "cwe": "CWE-22",
+      "request": {
+        "method": "GET",
+        "url": "https://route-planner.staging.fernwick.example.test/admin/export",
+        "parameter": "file"
+      },
+      "evidence": "GET /admin/export?file=../../etc/hostname -> 200, body: rp-staging-2",
+      "fingerprint": "kw3:e99f3e36154a93e84fef3ab0"
+    },
+    {
+      "id": "f-836e702d",
+      "rule": "KW-COOKIE-009",
+      "title": "Cookie without HttpOnly flag",
+      "severity": "Low",
+      "confidence": "firm",
+      "cwe": "CWE-1004",
+      "request": {
+        "method": "POST",
+        "url": "https://route-planner.staging.fernwick.example.test/admin/login",
+        "parameter": "rp_admin"
+      },
+      "evidence": "Set-Cookie: rp_admin=...; Secure",
+      "fingerprint": "kw3:e9d36e59112b21b4df194b78"
+    },
+    {
+      "id": "f-a78b9b43",
+      "rule": "KW-HDR-007",
+      "title": "Content-Security-Policy header missing",
+      "severity": "Low",
+      "confidence": "firm",
+      "cwe": "CWE-693",
+      "request": {
+        "method": "GET",
+        "url": "https://route-planner.staging.fernwick.example.test/debug/routes",
+        "parameter": null
+      },
+      "evidence": "HTTP/1.1 200 OK (no Content-Security-Policy header)",
+      "fingerprint": "kw3:f8fb822b815172f518450407"
+    },
+    {
+      "id": "f-e1f90b36",
+      "rule": "KW-INFO-005",
+      "title": "Server version disclosed",
+      "severity": "Info",
+      "confidence": "firm",
+      "cwe": "CWE-200",
+      "request": {
+        "method": "GET",
+        "url": "https://route-planner.staging.fernwick.example.test/",
+        "parameter": null
+      },
+      "evidence": "Server: uvicorn",
+      "fingerprint": "kw3:5d3136877479c2c26d53bf97"
+    }
+  ]
+}

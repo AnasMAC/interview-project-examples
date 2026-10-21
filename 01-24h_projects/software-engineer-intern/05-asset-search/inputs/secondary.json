@@ -1,0 +1,39 @@
+{
+  "assets": [
+    {
+      "tenant": "north",
+      "asset_id": "b2",
+      "name": "Zulu API",
+      "hostname": "zulu.example.test",
+      "tags": [
+        "prod",
+        "api"
+      ],
+      "status": "active",
+      "risk": 50
+    },
+    {
+      "tenant": "north",
+      "asset_id": "b1",
+      "name": "Alpha API",
+      "hostname": "alpha.example.test",
+      "tags": [
+        "prod",
+        "api"
+      ],
+      "status": "active",
+      "risk": 50
+    },
+    {
+      "tenant": "north",
+      "asset_id": "b3",
+      "name": "Plain Website",
+      "hostname": "web.example.test",
+      "tags": [
+        "web"
+      ],
+      "status": "active",
+      "risk": 20
+    }
+  ]
+}

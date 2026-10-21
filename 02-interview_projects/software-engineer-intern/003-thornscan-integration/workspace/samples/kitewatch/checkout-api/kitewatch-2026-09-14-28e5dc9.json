@@ -1,0 +1,74 @@
+{
+  "schema": "https://schemas.kitewatch.example.test/report/v3.json",
+  "scanner": {
+    "name": "Kitewatch",
+    "version": "3.2.1"
+  },
+  "scan": {
+    "target": "https://checkout-api.staging.fernwick.example.test",
+    "started": "2026-09-14T07:40:31Z",
+    "profile": "ci-baseline"
+  },
+  "findings": [
+    {
+      "id": "f-1c2d4a95",
+      "rule": "KW-SQLI-001",
+      "title": "SQL injection (error based)",
+      "severity": "Critical",
+      "confidence": "firm",
+      "cwe": "CWE-89",
+      "request": {
+        "method": "POST",
+        "url": "https://checkout-api.staging.fernwick.example.test/api/v1/refunds",
+        "parameter": "order_id"
+      },
+      "evidence": "sqlite3.OperationalError: unrecognized token: \"'\"",
+      "fingerprint": "kw3:9d932222e0602235d6502977"
+    },
+    {
+      "id": "f-66f21200",
+      "rule": "KW-COOKIE-003",
+      "title": "Cookie without Secure flag",
+      "severity": "Medium",
+      "confidence": "firm",
+      "cwe": "CWE-614",
+      "request": {
+        "method": "POST",
+        "url": "https://checkout-api.staging.fernwick.example.test/login",
+        "parameter": "checkout_session"
+      },
+      "evidence": "Set-Cookie: checkout_session=...; HttpOnly",
+      "fingerprint": "kw3:bd7cc1d3a77ae342fff9d39a"
+    },
+    {
+      "id": "f-0aacc009",
+      "rule": "KW-INFO-005",
+      "title": "Server version disclosed",
+      "severity": "Info",
+      "confidence": "firm",
+      "cwe": null,
+      "request": {
+        "method": "GET",
+        "url": "https://checkout-api.staging.fernwick.example.test/",
+        "parameter": null
+      },
+      "evidence": "Server: gunicorn/21.2.0",
+      "fingerprint": "kw3:5d3136877479c2c26d53bf97"
+    },
+    {
+      "id": "f-7b3a893c",
+      "rule": "KW-CORS-006",
+      "title": "CORS allows any origin with credentials",
+      "severity": "Medium",
+      "confidence": "firm",
+      "cwe": "CWE-942",
+      "request": {
+        "method": "GET",
+        "url": "https://checkout-api.staging.fernwick.example.test/api/v1/orders",
+        "parameter": null
+      },
+      "evidence": "Access-Control-Allow-Origin: https://evil.example.test",
+      "fingerprint": "kw3:0f11d1f5896c198e4f3ffa70"
+    }
+  ]
+}

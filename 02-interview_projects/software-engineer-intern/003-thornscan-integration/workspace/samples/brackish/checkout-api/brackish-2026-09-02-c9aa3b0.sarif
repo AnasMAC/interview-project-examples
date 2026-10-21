@@ -1,0 +1,326 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Brackish",
+          "semanticVersion": "3.12.0",
+          "informationUri": "https://brackish.example.test/docs",
+          "rules": [
+            {
+              "id": "BRK-SQLI-001",
+              "name": "sql-from-request",
+              "shortDescription": {
+                "text": "SQL query built from request data"
+              },
+              "helpUri": "https://brackish.example.test/rules/BRK-SQLI-001",
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-89"
+                ],
+                "security-severity": "8.8",
+                "precision": "high"
+              }
+            },
+            {
+              "id": "BRK-SSRF-005",
+              "name": "ssrf-unvalidated-url",
+              "shortDescription": {
+                "text": "Outbound request to a URL taken from input"
+              },
+              "helpUri": "https://brackish.example.test/rules/BRK-SSRF-005",
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-918"
+                ],
+                "security-severity": "8.1",
+                "precision": "high"
+              }
+            },
+            {
+              "id": "BRK-XSS-002",
+              "name": "template-unescaped-output",
+              "shortDescription": {
+                "text": "Template output marked safe without escaping"
+              },
+              "helpUri": "https://brackish.example.test/rules/BRK-XSS-002",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-79"
+                ],
+                "security-severity": "6.1",
+                "precision": "high"
+              }
+            },
+            {
+              "id": "BRK-SECRET-004",
+              "name": "hardcoded-credential",
+              "shortDescription": {
+                "text": "Hard-coded credential"
+              },
+              "helpUri": "https://brackish.example.test/rules/BRK-SECRET-004",
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-798"
+                ],
+                "security-severity": "7.5",
+                "precision": "high"
+              },
+              "messageStrings": {
+                "default": {
+                  "text": "Hard-coded credential assigned to {0}"
+                },
+                "test": {
+                  "text": "Hard-coded credential {0} in test code"
+                }
+              }
+            },
+            {
+              "id": "BRK-PATH-006",
+              "name": "path-from-request",
+              "shortDescription": {
+                "text": "File path built from request data"
+              },
+              "helpUri": "https://brackish.example.test/rules/BRK-PATH-006",
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-22"
+                ],
+                "security-severity": "7.5",
+                "precision": "high"
+              }
+            }
+          ]
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true,
+          "startTimeUtc": "2026-09-02T07:30:19Z",
+          "workingDirectory": {
+            "uri": "file:///builds/payments/checkout-api/"
+          }
+        }
+      ],
+      "versionControlProvenance": [
+        {
+          "repositoryUri": "https://git.fernwick.example.test/payments/checkout-api",
+          "revisionId": "c9aa3b0456af35f0cab251f9795c9ea70c024c68",
+          "branch": "main"
+        }
+      ],
+      "originalUriBaseIds": {
+        "%SRCROOT%": {
+          "description": {
+            "text": "Repository checkout root"
+          }
+        }
+      },
+      "results": [
+        {
+          "ruleId": "BRK-SQLI-001",
+          "ruleIndex": 0,
+          "message": {
+            "text": "order_id from request.args reaches cursor.execute() through an f-string"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/payments/refunds.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 42,
+                  "startColumn": 9,
+                  "endLine": 42,
+                  "endColumn": 79,
+                  "snippet": {
+                    "text": "cursor.execute(f\"SELECT * FROM refunds WHERE order_id = '{order_id}'\")"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "05f8fea586ca34ce:1"
+          }
+        },
+        {
+          "ruleId": "BRK-SSRF-005",
+          "ruleIndex": 1,
+          "message": {
+            "text": "callback_url from the merchant profile is fetched without the allow-list"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/payments/webhooks.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 63,
+                  "startColumn": 16,
+                  "endLine": 63,
+                  "endColumn": 55,
+                  "snippet": {
+                    "text": "resp = urlopen(callback_url, timeout=5)"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "53f9e64e781407e7:1"
+          }
+        },
+        {
+          "ruleId": "BRK-XSS-002",
+          "ruleIndex": 2,
+          "message": {
+            "text": "customer_note is rendered with |safe"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/checkout/templates/receipt.html",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 18,
+                  "startColumn": 5,
+                  "endLine": 18,
+                  "endColumn": 31,
+                  "snippet": {
+                    "text": "{{ customer_note | safe }}"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "5615512c2eedbac0:1"
+          }
+        },
+        {
+          "ruleId": "BRK-SECRET-004",
+          "ruleIndex": 3,
+          "message": {
+            "id": "default",
+            "arguments": [
+              "PSP_API_KEY"
+            ]
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/checkout/settings.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 27,
+                  "startColumn": 1,
+                  "endLine": 27,
+                  "endColumn": 46,
+                  "snippet": {
+                    "text": "PSP_API_KEY = \"DEMO-psp-key-4c1d7e0a9b2f6385\""
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "26aacd1f3c591ce9:1"
+          }
+        },
+        {
+          "ruleId": "BRK-SECRET-004",
+          "ruleIndex": 3,
+          "level": "note",
+          "message": {
+            "id": "test",
+            "arguments": [
+              "password"
+            ]
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/fixtures/gateway_keys.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 15,
+                  "startColumn": 5,
+                  "endLine": 15,
+                  "endColumn": 30,
+                  "snippet": {
+                    "text": "password = \"DEMO-hunter2\""
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "0c0b0a821a383480:1"
+          }
+        },
+        {
+          "ruleId": "BRK-PATH-006",
+          "ruleIndex": 4,
+          "message": {
+            "text": "request.args['file'] is joined to EXPORT_DIR without normalisation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/checkout/api/orders.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 88,
+                  "startColumn": 20,
+                  "endLine": 88,
+                  "endColumn": 84,
+                  "snippet": {
+                    "text": "return send_file(os.path.join(EXPORT_DIR, request.args[\"file\"]))"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "f97390e0eb262baa:1"
+          }
+        }
+      ]
+    }
+  ]
+}

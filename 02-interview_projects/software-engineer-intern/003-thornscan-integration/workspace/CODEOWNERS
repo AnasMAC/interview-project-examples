@@ -1,0 +1,51 @@
+# Review routing for fernwick-ledger. The last matching pattern wins.
+# Handles are Fernwick directory names (fernwick.example.test).
+
+*                           @jalbrecht
+
+# core: settings, database, migrations, models
+/ledger/core/               @jalbrecht
+/ledger/migrations/         @jalbrecht @mrojas
+/tests/helpers.py           @jalbrecht
+/docs/architecture.md       @jalbrecht
+/docs/adr/                  @jalbrecht
+
+# components
+/ledger/parsers/            @praman
+/samples/                   @praman
+/docs/parsers.md            @praman
+/ledger/normalize/          @mrojas
+/ledger/dedupe/             @mrojas
+/samples/repos/             @mrojas @sokafor
+/ledger/ownership/          @sokafor
+/ledger/sla/                @sokafor
+/config/sla.toml            @sokafor @jalbrecht
+/config/holidays.toml       @sokafor
+/ledger/reports/            @sokafor
+/ledger/api/                @jalbrecht
+/ledger/cli.py              @ekowalczyk
+/ledger/seed.py             @ekowalczyk
+/scripts/                   @ekowalczyk
+
+# tests follow their component
+/tests/core/                @jalbrecht
+/tests/parsers/             @praman
+/tests/normalize/           @mrojas
+/tests/dedupe/              @mrojas
+/tests/ownership/           @sokafor
+/tests/sla/                 @sokafor
+/tests/reports/             @sokafor
+/tests/api/                 @jalbrecht
+/tests/cli/                 @ekowalczyk
+/tests/integration/         @jalbrecht @mrojas
+/tests/seed/                @ekowalczyk
+
+# platform and packaging
+/Makefile                   @ekowalczyk
+/pyproject.toml             @ekowalczyk
+/config/ledger.toml         @ekowalczyk @jalbrecht
+/docs/runbook.md            @ekowalczyk
+
+# requests from other teams are triaged by the lead and the SLA owner
+/docs/requests/             @jalbrecht @sokafor
+/CHANGELOG.md               @jalbrecht

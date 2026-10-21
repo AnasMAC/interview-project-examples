@@ -1,0 +1,31 @@
+# Reviews are requested from the owners of every path a change touches.
+# Platform security approves anything that changes what the gate decides.
+
+*                               @mossbank/platform-security
+
+/gatekeeper/core/               @grace-adeyemi
+/migrations/                    @grace-adeyemi @mariana-silva
+/gatekeeper/cli/                @grace-adeyemi
+/gatekeeper/seed/               @grace-adeyemi
+
+/gatekeeper/ingest/             @tobias-krueger
+/gatekeeper/ingest/adapters/legacy.py  @tobias-krueger @ana-petrovic
+/gatekeeper/evaluation/         @tobias-krueger
+/docs/policy-dsl.md             @tobias-krueger
+
+/gatekeeper/waivers/            @mariana-silva
+/gatekeeper/audit/              @mariana-silva @grace-adeyemi
+/gatekeeper/reporting/          @mariana-silva
+/scripts/bench.py               @mariana-silva
+
+/gatekeeper/callbacks/          @kwame-boateng
+/gatekeeper/scheduler/          @kwame-boateng
+/ci_mock/                       @kwame-boateng
+/docker-compose.yml             @kwame-boateng
+/Dockerfile                     @kwame-boateng
+/Makefile                       @kwame-boateng
+/docs/runbook.md                @kwame-boateng
+
+/docs/adr/                      @grace-adeyemi
+/docs/architecture.md           @grace-adeyemi
+/docs/requests/                 @elif-yildiz

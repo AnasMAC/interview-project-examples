@@ -1,0 +1,39 @@
+{% extends "admin/base.html" %}
+{% block title %}Webhooks{% endblock %}
+{% block content %}
+<h1>Webhooks</h1>
+<table>
+  <thead><tr><th>URL</th><th>Events</th><th>Enabled</th><th>Delivery</th></tr></thead>
+  <tbody>
+    {% for webhook in webhooks|default([]) %}
+    <tr>
+      <td>{{ webhook.url }}</td>
+      <td>{{ webhook.events|join(', ') }}</td>
+      <td>{{ 'yes' if webhook.enabled else 'no' }}</td>
+      <td>
+        <form method="post" action="/admin/webhooks/{{ webhook.id }}/enabled" class="inline">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="enabled" value="{{ '0' if webhook.enabled else '1' }}">
+          <button type="submit">{{ 'Disable' if webhook.enabled else 'Enable' }}</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h2>Add a webhook</h2>
+<form method="post" action="/admin/webhooks">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label for="url">URL</label>
+  <input id="url" name="url" type="url" placeholder="http://mockhook.test/hooks/tenant" required>
+  <fieldset>
+    <legend>Events</legend>
+    {% for event in events|default([]) %}
+    <label><input type="checkbox" name="events" value="{{ event }}"> {{ event }}</label>
+    {% endfor %}
+  </fieldset>
+  <button type="submit">Create webhook</button>
+</form>
+<p class="meta">Secrets are generated on creation and shown once.</p>
+{% endblock %}

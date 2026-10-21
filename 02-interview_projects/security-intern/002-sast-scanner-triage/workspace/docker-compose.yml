@@ -1,0 +1,30 @@
+# Local development stack.
+#
+# Only Postgres runs in Compose; the application, the ingest worker and the two
+# local mocks run from the virtualenv (`make serve`, `make worker`,
+# `make mockhook`, `make mock-metadata`).
+#
+# The host port is overridable because development machines often already have
+# something on 55432: set BELLPOST_DB_PORT in .env or in the shell.
+name: bellpost
+
+services:
+  db:
+    image: postgres:16.4-alpine
+    environment:
+      POSTGRES_USER: bellpost
+      POSTGRES_PASSWORD: bellpost
+      POSTGRES_DB: bellpost
+    ports:
+      - "127.0.0.1:${BELLPOST_DB_PORT:-55432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bellpost -d bellpost"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+      start_period: 5s
+    volumes:
+      - bellpost-db-data:/var/lib/postgresql/data
+
+volumes:
+  bellpost-db-data:

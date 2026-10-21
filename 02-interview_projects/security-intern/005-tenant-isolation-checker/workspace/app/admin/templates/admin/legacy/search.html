@@ -1,0 +1,24 @@
+{% extends "admin/base.html" %}
+{% block title %}Classic search{% endblock %}
+{% block content %}
+<h1>Classic search</h1>
+<p class="meta">The old search page, kept for the mobile companion app. Up to {{ limit|default(200) }} results, no pagination.</p>
+<form method="get" action="/admin/search">
+  <label for="q">Search</label>
+  <input id="q" name="q" value="{{ query|default('') }}" required>
+  <button type="submit">Search</button>
+</form>
+<table>
+  <thead><tr><th>Number</th><th>Subject</th><th>Status</th><th>Customer</th></tr></thead>
+  <tbody>
+    {% for ticket in results|default([]) %}
+    <tr>
+      <td>{{ ticket.number }}</td>
+      <td>{{ ticket.subject }}</td>
+      <td>{{ ticket.status }}</td>
+      <td>{{ ticket.requester_name|default('-') }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

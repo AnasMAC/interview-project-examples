@@ -1,0 +1,23 @@
+{% extends "admin/base.html" %}
+{% block title %}Reports{% endblock %}
+{% block content %}
+<h1>Reports</h1>
+<p class="meta">Day buckets use the tenant timezone: {{ tenant.timezone|default('UTC') }}.</p>
+<table>
+  <thead><tr><th>Status</th><th>Tickets</th></tr></thead>
+  <tbody>
+    {% for status, count in (status_counts|default({})).items() %}
+    <tr><td>{{ status }}</td><td>{{ count }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+<table>
+  <thead><tr><th>Day</th><th>New tickets</th></tr></thead>
+  <tbody>
+    {% for row in days|default([]) %}
+    <tr><td>{{ row.day }}</td><td>{{ row.count }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+<p><a href="/admin/tickets.csv">Download the ticket list as CSV</a></p>
+{% endblock %}

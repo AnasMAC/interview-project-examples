@@ -1,0 +1,98 @@
+{
+  "kitewatch": "2.9.3",
+  "generated": "2026-08-24T07:41:12Z",
+  "site": "https://checkout-api.staging.fernwick.example.test",
+  "alerts": [
+    {
+      "pluginId": "KW-SQLI-001",
+      "alert": "SQL injection (error based)",
+      "risk": 5,
+      "confidence": 3,
+      "cweid": "89",
+      "description": "A database error is returned when a quote is injected.",
+      "solution": "Use parameterised queries.",
+      "instances": [
+        {
+          "uri": "https://checkout-api.staging.fernwick.example.test/api/v1/refunds",
+          "method": "POST",
+          "param": "order_id",
+          "evidence": "sqlite3.OperationalError: unrecognized token: \"'\""
+        }
+      ]
+    },
+    {
+      "pluginId": "KW-XSS-002",
+      "alert": "Reflected cross-site scripting",
+      "risk": 4,
+      "confidence": 2,
+      "cweid": "79",
+      "solution": "Escape output in the receipt template.",
+      "instances": [
+        {
+          "uri": "https://checkout-api.staging.fernwick.example.test/receipt",
+          "method": "GET",
+          "param": "note",
+          "evidence": "<script>kw(1)</script>"
+        }
+      ]
+    },
+    {
+      "pluginId": "KW-COOKIE-003",
+      "alert": "Cookie without Secure flag",
+      "risk": 3,
+      "confidence": 3,
+      "cweid": "614",
+      "solution": "Set Secure on session cookies.",
+      "instances": [
+        {
+          "uri": "https://checkout-api.staging.fernwick.example.test/login",
+          "method": "POST",
+          "param": "checkout_session",
+          "evidence": "Set-Cookie: checkout_session=...; HttpOnly"
+        },
+        {
+          "uri": "https://checkout-api.staging.fernwick.example.test/cart",
+          "method": "GET",
+          "param": "cart_id",
+          "evidence": "Set-Cookie: cart_id=...; Path=/"
+        }
+      ]
+    },
+    {
+      "pluginId": "KW-HDR-004",
+      "alert": "Strict-Transport-Security header missing",
+      "risk": 2,
+      "confidence": 3,
+      "cweid": "319",
+      "instances": [
+        {
+          "uri": "https://checkout-api.staging.fernwick.example.test/",
+          "method": "GET",
+          "param": "",
+          "evidence": ""
+        },
+        {
+          "uri": "https://checkout-api.staging.fernwick.example.test/api/v1/health",
+          "method": "GET",
+          "param": "",
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "pluginId": "KW-INFO-005",
+      "alert": "Server version disclosed",
+      "risk": 1,
+      "confidence": 3,
+      "cweid": "-1",
+      "instances": [
+        {
+          "uri": "https://checkout-api.staging.fernwick.example.test/",
+          "method": "GET",
+          "param": "",
+          "evidence": "Server: gunicorn/21.2.0"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{% extends "admin/base.html" %}
+{% block title %}Tenant settings{% endblock %}
+{% block content %}
+<h1>Tenant settings</h1>
+<p class="meta">Editing {{ tenant.slug|default('') }}; the tenant comes from your session.</p>
+<form method="post" action="/admin/tenants/settings">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label for="name">Display name</label>
+  <input id="name" name="name" value="{{ tenant.name|default('') }}">
+  <label for="timezone">Timezone</label>
+  <input id="timezone" name="timezone" value="{{ tenant.timezone|default('UTC') }}">
+  <label for="plan">Plan</label>
+  <select id="plan" name="plan">
+    {% for value in plans|default(["starter", "growth", "scale"]) %}
+    <option value="{{ value }}"{% if value == tenant.plan|default('') %} selected{% endif %}>{{ value }}</option>
+    {% endfor %}
+  </select>
+  <p class="meta">Tenants on the starter plan keep the weekly report only.</p>
+  <button type="submit">Save settings</button>
+</form>
+
+<h2>Import settings</h2>
+<form method="post" action="/admin/settings/import">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label for="document">YAML document</label>
+  <textarea id="document" name="document" rows="8" cols="60"></textarea>
+  <button type="submit">Import</button>
+</form>
+{% endblock %}

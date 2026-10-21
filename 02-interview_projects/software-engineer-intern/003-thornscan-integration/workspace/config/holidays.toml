@@ -1,0 +1,55 @@
+# Public holidays that do not count as SLA business days (Free State of Saxony,
+# where Fernwick HQ in Leipzig is). Weekends are skipped by the calendar
+# itself; holidays that fall on a Saturday are listed anyway so the file reads
+# like the official list. Policy owner: Samuel Okafor (AppSec).
+#
+# Not included: Corpus Christi (only some Sorbian municipalities in Saxony),
+# 24 and 31 December (working days, even if half the building is empty).
+#
+# TODO(samuel): add 2027 before December. Until then, due dates that land in
+# 2027 skip weekends only, and Ledger logs "sla.holidays_missing" (once per
+# loaded calendar).
+
+[[holiday]]
+date = 2026-01-01
+name = "Neujahr"
+
+[[holiday]]
+date = 2026-04-03
+name = "Karfreitag"
+
+[[holiday]]
+date = 2026-04-06
+name = "Ostermontag"
+
+[[holiday]]
+date = 2026-05-01
+name = "Tag der Arbeit"
+
+[[holiday]]
+date = 2026-05-14
+name = "Christi Himmelfahrt"
+
+[[holiday]]
+date = 2026-05-25
+name = "Pfingstmontag"
+
+[[holiday]]
+date = 2026-10-03
+name = "Tag der Deutschen Einheit"
+
+[[holiday]]
+date = 2026-10-31
+name = "Reformationstag"
+
+[[holiday]]
+date = 2026-11-18
+name = "Buß- und Bettag"
+
+[[holiday]]
+date = 2026-12-25
+name = "1. Weihnachtsfeiertag"
+
+[[holiday]]
+date = 2026-12-26
+name = "2. Weihnachtsfeiertag"

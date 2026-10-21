@@ -1,0 +1,64 @@
+{
+  "scanner": "Larkspur SAST 4.2.0",
+  "scan_started": "2026-05-06T22:10:04Z",
+  "scan_finished": "2026-05-06T22:14:51Z",
+  "target": "glasswick/bellpost@main",
+  "ruleset": "web-python-extended",
+  "findings": [
+    {
+      "id": "LKS-0001",
+      "rule": "py/sql-string-building",
+      "severity": "high",
+      "confidence": "medium",
+      "file": "app/legacy/ticket_search.py",
+      "line": 88,
+      "evidence": "sql = 'SELECT id, number FROM tickets WHERE tenant_id = %s AND lower(subject) LIKE %s'",
+      "note": "query built with % formatting; verify the tenant filter is still bound"
+    },
+    {
+      "id": "LKS-0002",
+      "rule": "py/command-injection-pattern",
+      "severity": "critical",
+      "confidence": "low",
+      "file": "tests/fixtures/scanner_noise/payload_strings.py",
+      "line": 12,
+      "evidence": "SHELL_PAYLOADS = ['os.system(...)', 'subprocess.check_output(...)']",
+      "note": "string literals in a fixture module; triage"
+    },
+    {
+      "id": "LKS-0003",
+      "rule": "secret/hardcoded",
+      "severity": "high",
+      "confidence": "high",
+      "file": "config/.env.2019.bak",
+      "line": 6,
+      "evidence": "HELPDESK_SMTP_PASSWORD=DEMO-helpdesk-smtp-password",
+      "note": "value starts with DEMO-"
+    },
+    {
+      "id": "LKS-0004",
+      "rule": "secret/base64-blob",
+      "severity": "medium",
+      "confidence": "low",
+      "file": "tests/fixtures/scanner_noise/legacy_export_excerpt.txt",
+      "line": 9,
+      "evidence": "QlVORExFX0JMT0JfREVNT19D",
+      "note": "long base64 run; entropy check inconclusive"
+    },
+    {
+      "id": "LKS-0005",
+      "rule": "py/insecure-temp-file",
+      "severity": "low",
+      "confidence": "medium",
+      "file": "app/attachments/storage.py",
+      "line": 1,
+      "evidence": "no finding content available (scanner timeout)",
+      "note": "rescan requested by the platform team"
+    }
+  ],
+  "tokens_seen": [
+    "DEMO-bpk-brp-agent-0001",
+    "DEMO-whsec-brp-0001",
+    "DEMO-brightpath-admin"
+  ]
+}

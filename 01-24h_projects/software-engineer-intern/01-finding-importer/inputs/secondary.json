@@ -1,0 +1,36 @@
+{
+  "tenant": "north",
+  "assets": [
+    "api",
+    "portal"
+  ],
+  "records": [
+    {
+      "source_id": "s1",
+      "tenant": "north",
+      "asset_id": "api",
+      "rule_id": "auth",
+      "location": "https://api.example.test/login",
+      "severity": "high",
+      "evidence": "second batch"
+    },
+    {
+      "source_id": "s2",
+      "tenant": "north",
+      "asset_id": "portal",
+      "rule_id": "cookie",
+      "location": "/session",
+      "severity": "low",
+      "evidence": "missing flag"
+    },
+    {
+      "source_id": "s3",
+      "tenant": "north",
+      "asset_id": "api",
+      "rule_id": "rate",
+      "location": "/rate",
+      "severity": "urgent",
+      "evidence": "sample"
+    }
+  ]
+}

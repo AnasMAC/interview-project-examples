@@ -1,0 +1,357 @@
+{
+  "tenant": "lantern-demo-eu",
+  "exported_at": "2026-06-09T15:00:00Z",
+  "apps": [
+    {
+      "app_id": "A-01",
+      "catalog_id": "DEMO-AND-SHOP",
+      "name": "Demo Shop (Android)",
+      "platform": "android",
+      "coverage_note": ""
+    },
+    {
+      "app_id": "A-02",
+      "catalog_id": "DEMO-IOS-SHOP",
+      "name": "Demo Shop (iOS)",
+      "platform": "ios",
+      "coverage_note": ""
+    },
+    {
+      "app_id": "A-03",
+      "catalog_id": "DEMO-WEB-CHECKOUT",
+      "name": "Demo Checkout (web)",
+      "platform": "web",
+      "coverage_note": ""
+    },
+    {
+      "app_id": "A-04",
+      "catalog_id": "DEMO-AND-CARE",
+      "name": "Demo Care (Android)",
+      "platform": "android",
+      "coverage_note": ""
+    },
+    {
+      "app_id": "A-05",
+      "catalog_id": "DEMO-IOS-CARE",
+      "name": "Demo Care (iOS)",
+      "platform": "ios",
+      "coverage_note": ""
+    },
+    {
+      "app_id": "A-90",
+      "catalog_id": "BRISA-PAY-AND",
+      "name": "Brisa Pay Android - PoC Apr 2026",
+      "platform": "android",
+      "coverage_note": "left from Brisa Pay evaluation"
+    }
+  ],
+  "scans": [
+    {
+      "scan_id": "S-00",
+      "app_id": "A-03",
+      "type": "dynamic",
+      "state": "completed",
+      "completed_at": "2026-05-06T14:20:00Z",
+      "build": "checkout-staging-2026-05-06",
+      "note": "historical scan kept for trend view"
+    },
+    {
+      "scan_id": "S-01",
+      "app_id": "A-01",
+      "type": "static",
+      "state": "completed",
+      "completed_at": "2026-06-02T09:10:00Z",
+      "build": "demo-shop-4.2.0.aab",
+      "note": ""
+    },
+    {
+      "scan_id": "S-02",
+      "app_id": "A-01",
+      "type": "dynamic",
+      "state": "completed",
+      "completed_at": "2026-06-02T10:05:00Z",
+      "build": "demo-shop-4.2.0.aab",
+      "note": ""
+    },
+    {
+      "scan_id": "S-03",
+      "app_id": "A-02",
+      "type": "static",
+      "state": "completed",
+      "completed_at": "2026-05-12T08:40:00Z",
+      "build": "demo-shop-4.1.0-adhoc.ipa",
+      "note": ""
+    },
+    {
+      "scan_id": "S-04",
+      "app_id": "A-02",
+      "type": "dynamic",
+      "state": "completed",
+      "completed_at": "2026-05-12T09:30:00Z",
+      "build": "demo-shop-4.1.0-adhoc.ipa",
+      "note": ""
+    },
+    {
+      "scan_id": "S-05",
+      "app_id": "A-03",
+      "type": "dynamic",
+      "state": "completed",
+      "completed_at": "2026-06-05T16:00:00Z",
+      "build": "checkout-staging-2026-06-05",
+      "note": "authenticated with demo bearer token"
+    },
+    {
+      "scan_id": "S-06",
+      "app_id": "A-04",
+      "type": "static",
+      "state": "completed",
+      "completed_at": "2026-06-04T11:00:00Z",
+      "build": "demo-care-2.3.1.apk",
+      "note": ""
+    },
+    {
+      "scan_id": "S-07",
+      "app_id": "A-04",
+      "type": "dynamic",
+      "state": "completed",
+      "completed_at": "2026-06-04T11:50:00Z",
+      "build": "demo-care-2.3.1.apk",
+      "note": "triggered by GitHub Actions workflow I-04"
+    },
+    {
+      "scan_id": "S-08",
+      "app_id": "A-05",
+      "type": "static",
+      "state": "completed",
+      "completed_at": "2026-06-03T13:15:00Z",
+      "build": "demo-care-ios-2.3.0-appstore.ipa",
+      "note": "App Store-encrypted IPA"
+    },
+    {
+      "scan_id": "S-90",
+      "app_id": "A-90",
+      "type": "static",
+      "state": "completed",
+      "completed_at": "2026-04-18T10:00:00Z",
+      "build": "brisapay-7.4.2-release.aab",
+      "note": "Brisa PoC"
+    },
+    {
+      "scan_id": "S-91",
+      "app_id": "A-90",
+      "type": "dynamic",
+      "state": "completed",
+      "completed_at": "2026-04-18T11:10:00Z",
+      "build": "brisapay-7.4.2-release.aab",
+      "note": "Brisa PoC"
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "F-01",
+      "app_id": "A-01",
+      "last_seen_scan": "S-01",
+      "title": "Hardcoded API key in app resources",
+      "severity": "high",
+      "status": "confirmed",
+      "validated_by": "demo-analyst",
+      "status_reason": ""
+    },
+    {
+      "finding_id": "F-02",
+      "app_id": "A-01",
+      "last_seen_scan": "S-02",
+      "title": "Cleartext HTTP request to analytics endpoint",
+      "severity": "medium",
+      "status": "open",
+      "validated_by": "",
+      "status_reason": ""
+    },
+    {
+      "finding_id": "F-03",
+      "app_id": "A-01",
+      "last_seen_scan": "S-01",
+      "title": "Outdated networking library with a published advisory",
+      "severity": "medium",
+      "status": "fixed",
+      "validated_by": "",
+      "status_reason": ""
+    },
+    {
+      "finding_id": "F-04",
+      "app_id": "A-01",
+      "last_seen_scan": "S-02",
+      "title": "Session token written to debug log",
+      "severity": "low",
+      "status": "false_positive",
+      "validated_by": "",
+      "status_reason": ""
+    },
+    {
+      "finding_id": "F-05",
+      "app_id": "A-02",
+      "last_seen_scan": "S-03",
+      "title": "Keychain item accessible while device is locked",
+      "severity": "medium",
+      "status": "open",
+      "validated_by": "",
+      "status_reason": ""
+    },
+    {
+      "finding_id": "F-06",
+      "app_id": "A-02",
+      "last_seen_scan": "S-04",
+      "title": "Certificate pinning not enforced",
+      "severity": "medium",
+      "status": "confirmed",
+      "validated_by": "",
+      "status_reason": ""
+    },
+    {
+      "finding_id": "F-07",
+      "app_id": "A-03",
+      "last_seen_scan": "S-05",
+      "title": "Reflected XSS in search parameter",
+      "severity": "high",
+      "status": "open",
+      "validated_by": "",
+      "status_reason": ""
+    },
+    {
+      "finding_id": "F-08",
+      "app_id": "A-03",
+      "last_seen_scan": "S-05",
+      "title": "No rate limiting on login endpoint",
+      "severity": "medium",
+      "status": "risk_accepted",
+      "validated_by": "",
+      "status_reason": "Demo story: compensating WAF rule; review 2026-12-31"
+    },
+    {
+      "finding_id": "F-09",
+      "app_id": "A-03",
+      "last_seen_scan": "S-00",
+      "title": "Session cookie missing Secure flag",
+      "severity": "low",
+      "status": "fixed",
+      "validated_by": "",
+      "status_reason": ""
+    },
+    {
+      "finding_id": "F-10",
+      "app_id": "A-04",
+      "last_seen_scan": "S-06",
+      "title": "Exported activity without permission check",
+      "severity": "high",
+      "status": "open",
+      "validated_by": "",
+      "status_reason": ""
+    },
+    {
+      "finding_id": "F-11",
+      "app_id": "A-04",
+      "last_seen_scan": "S-07",
+      "title": "Health record cached on shared external storage",
+      "severity": "high",
+      "status": "confirmed",
+      "validated_by": "demo-analyst",
+      "status_reason": ""
+    },
+    {
+      "finding_id": "F-12",
+      "app_id": "A-04",
+      "last_seen_scan": "S-06",
+      "title": "Weak hash algorithm (MD5) detected",
+      "severity": "low",
+      "status": "false_positive",
+      "validated_by": "",
+      "status_reason": "Used only as an image-cache key, no security purpose"
+    },
+    {
+      "finding_id": "F-13",
+      "app_id": "A-05",
+      "last_seen_scan": "S-08",
+      "title": "App Transport Security exception for all domains",
+      "severity": "medium",
+      "status": "open",
+      "validated_by": "",
+      "status_reason": ""
+    },
+    {
+      "finding_id": "F-90",
+      "app_id": "A-90",
+      "last_seen_scan": "S-90",
+      "title": "Hardcoded payment gateway secret",
+      "severity": "critical",
+      "status": "confirmed",
+      "validated_by": "k.benali@brisapay.example",
+      "status_reason": ""
+    },
+    {
+      "finding_id": "F-91",
+      "app_id": "A-90",
+      "last_seen_scan": "S-91",
+      "title": "WebView JavaScript bridge exposed to remote content",
+      "severity": "high",
+      "status": "open",
+      "validated_by": "",
+      "status_reason": ""
+    }
+  ],
+  "integrations": [
+    {
+      "integration_id": "I-01",
+      "type": "jira_cloud",
+      "target": "project DEMO",
+      "enabled": false,
+      "last_sync": "2026-05-03T08:00:00Z"
+    },
+    {
+      "integration_id": "I-02",
+      "type": "slack_webhook",
+      "target": "#demo-alerts",
+      "enabled": true,
+      "last_sync": "2026-06-08T17:30:00Z"
+    },
+    {
+      "integration_id": "I-03",
+      "type": "slack_webhook",
+      "target": "#brisa-poc-alerts",
+      "enabled": true,
+      "last_sync": "2026-04-25T12:00:00Z"
+    },
+    {
+      "integration_id": "I-04",
+      "type": "github_actions",
+      "target": "lantern-demo/demo-care-android",
+      "enabled": true,
+      "last_sync": "2026-06-07T09:45:00Z"
+    }
+  ],
+  "settings": [
+    {
+      "setting_id": "X-01",
+      "name": "data_region",
+      "value": "EU (Frankfurt)",
+      "feature_stage": "GA"
+    },
+    {
+      "setting_id": "X-02",
+      "name": "ai_fix_suggestions",
+      "value": "enabled",
+      "feature_stage": "exploring"
+    },
+    {
+      "setting_id": "X-03",
+      "name": "saml_sso",
+      "value": "not_configured",
+      "feature_stage": "GA"
+    },
+    {
+      "setting_id": "X-04",
+      "name": "plan",
+      "value": "Enterprise (demo)",
+      "feature_stage": "GA"
+    }
+  ]
+}

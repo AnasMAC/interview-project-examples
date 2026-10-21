@@ -1,0 +1,95 @@
+# Local development stack for Atlas.
+#
+# Only `web` publishes a host port: 127.0.0.1:${ATLAS_PORT:-8000}. Postgres and
+# mockhook are reachable on the compose network only. Nothing sets
+# container_name, so copies of the stack can run side by side under different
+# COMPOSE_PROJECT_NAME values.
+name: atlas
+
+x-app: &app
+  build:
+    context: .
+    dockerfile: Dockerfile
+  image: brindlecove-atlas:dev
+  volumes:
+    - ./:/app
+  environment: &app-env
+    DJANGO_SETTINGS_MODULE: atlas.settings.dev
+    ATLAS_DB_HOST: db
+    ATLAS_DB_NAME: atlas
+    ATLAS_DB_USER: atlas
+    ATLAS_DB_PASSWORD: DEMO-atlas-db
+    ATLAS_LOG_FORMAT: json
+    ATLAS_LOG_LEVEL: INFO
+    # Dev clock: start at the seed's anchor (docs/runbook.md). `ATLAS_NOW= make up` = real time.
+    ATLAS_NOW: ${ATLAS_NOW-2026-11-05T14:30:00Z}
+  depends_on: &app-deps
+    db:
+      condition: service_healthy
+
+services:
+  db:
+    image: postgres:16.4-alpine
+    environment:
+      POSTGRES_USER: atlas
+      POSTGRES_PASSWORD: DEMO-atlas-db
+      POSTGRES_DB: atlas
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U atlas -d atlas"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  web:
+    <<: *app
+    environment:
+      <<: *app-env
+      ATLAS_SERVICE: web
+    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+    ports:
+      - "127.0.0.1:${ATLAS_PORT:-8000}:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/healthz', timeout=2)"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  worker:
+    <<: *app
+    environment:
+      <<: *app-env
+      ATLAS_SERVICE: worker
+    command: ["python", "manage.py", "run_worker"]
+
+  mockhook:
+    <<: *app
+    depends_on: []
+    environment:
+      ATLAS_SERVICE: mockhook
+      MOCKHOOK_PORT: "9000"
+      MOCKHOOK_LOG: /app/var/mockhook/deliveries.jsonl
+      # Optional: verify signatures with one secret (only that org's deliveries pass).
+      MOCKHOOK_SECRET: ${MOCKHOOK_SECRET-}
+      # Same dev clock as web/worker, for the signature timestamp check.
+      ATLAS_NOW: ${ATLAS_NOW-2026-11-05T14:30:00Z}
+    command: ["python", "-m", "mockhook"]
+
+  # `make test` runs this one-off container against its own database
+  # (pytest-django creates test_atlas_test), so tests never touch dev data.
+  tests:
+    <<: *app
+    profiles: ["tests"]
+    environment:
+      <<: *app-env
+      DJANGO_SETTINGS_MODULE: atlas.settings.test
+      ATLAS_DB_NAME: atlas_test
+      ATLAS_LOG_FORMAT: text
+      ATLAS_LOG_LEVEL: WARNING
+      ATLAS_SERVICE: tests
+      ATLAS_NOW: ""  # tests freeze the clock themselves (tests/conftest.py)
+    command: ["pytest"]
+
+volumes:
+  pgdata:

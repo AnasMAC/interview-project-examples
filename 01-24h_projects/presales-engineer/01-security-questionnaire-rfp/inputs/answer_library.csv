@@ -1,0 +1,17 @@
+lib_id,topic,answer_text,source_rfp,last_updated
+L01,Android analysis,"Lantern performs static and dynamic analysis of Android APK and AAB builds that the customer is authorized to test.",RFP-2025-14,2025-09-02
+L02,iOS dynamic analysis,"Dynamic analysis works on any IPA, including builds downloaded directly from the App Store.",RFP-2024-31,2024-11-18
+L03,GraphQL,"Yes. Lantern performs GraphQL-specific testing, including introspection exposure and query-depth attacks.",RFP-2025-03,2025-02-10
+L04,SARIF export,"Findings can be exported in SARIF 2.1.0, as well as JSON and CSV.",RFP-2025-14,2025-09-02
+L05,Jira,"Lantern integrates natively with Jira Cloud, with two-way status sync between findings and issues.",RFP-2025-20,2025-12-05
+L06,ServiceNow,"A native ServiceNow integration will be available in Q3 2026.",RFP-2026-02,2026-03-12
+L07,SSO,"SAML SSO is included in all Lantern plans.",RFP-2024-31,2024-11-18
+L08,Data retention,"Data retention is fixed at 12 months for all customers.",RFP-2024-22,2024-07-30
+L09,Deployment,"An on-premises deployment is available for Enterprise customers.",RFP-2024-22,2024-07-30
+L10,Data residency,"Customers can choose an EU (Frankfurt) or US region at tenant creation; tenant data stays in that region.",RFP-2025-20,2025-12-05
+L11,ISO 27001,"Lantern is ISO 27001 certified; the certificate is attached.",RFP-2025-03,2025-02-10
+L12,SOC 2,"Our SOC 2 Type II report is available under NDA.",RFP-2026-02,2026-03-12
+L13,Penetration test,"Our full third-party penetration test report is provided to any prospect on request.",RFP-2025-03,2025-02-10
+L14,CI/CD,"Use the lantern CLI with --fail-on to gate pipelines. The API key is read from the LANTERN_API_KEY environment variable; store it as a masked CI secret.",RFP-2026-02,2026-03-12
+L15,Web authentication,"Web scans authenticate with a recorded login sequence or a static bearer token. MFA-protected apps need a test account with MFA disabled or a bearer token.",RFP-2025-20,2025-12-05
+L16,Coverage,"Lantern guarantees detection of all OWASP Top 10 vulnerabilities.",RFP-2024-31,2024-11-18

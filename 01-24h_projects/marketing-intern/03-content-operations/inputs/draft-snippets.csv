@@ -1,0 +1,7 @@
+snippet_id,draft,source_hint
+D1,QueueHarbor automatically finds every vulnerability,P1
+D2,Assign one accountable owner for the next action,S3
+D3,Merge every finding with the same title,S5
+D4,Resolve all critical findings within 24 hours,S3
+D5,Try our free account now at /old-trial,P3
+D6,Before review check source owner and next action,S7

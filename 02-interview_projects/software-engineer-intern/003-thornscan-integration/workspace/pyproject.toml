@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fernwick-ledger"
+version = "2.4.1"
+description = "Ingests, deduplicates and tracks security scanner findings for Fernwick AppSec"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+authors = [{ name = "Fernwick AppSec", email = "appsec@fernwick.example.test" }]
+
+[project.scripts]
+ledger = "ledger.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["ledger*"]
+
+[tool.setuptools.package-data]
+ledger = ["migrations/*.sql"]

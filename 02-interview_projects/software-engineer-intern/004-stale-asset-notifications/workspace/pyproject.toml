@@ -1,0 +1,29 @@
+[project]
+name = "brindlecove-atlas"
+version = "0.14.3"
+description = "Attack-surface inventory: imports, merge, ownership, exposure rules, webhooks and a dashboard."
+requires-python = ">=3.12,<3.13"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "atlas.settings.test"
+testpaths = ["tests"]
+pythonpath = ["."]
+# The source is bind-mounted into containers: no cache files on the host.
+addopts = "-ra -q -p no:cacheprovider --strict-markers"
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+extend-exclude = ["var", "*/migrations/*"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "S", "DJ"]
+ignore = [
+    "S101",  # assert is fine in tests
+    "S311",  # random only drives deterministic seeding
+    "DJ008",  # __str__ only where the shell and logs need it
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S105", "S106", "S107"]
+"atlas/core/management/commands/seed.py" = ["S105", "S106"]

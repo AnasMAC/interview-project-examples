@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "suppressions": [
+    {
+      "tool": "thistle",
+      "rule": "TH-RAND-INSECURE",
+      "path": "planner/simulation/**",
+      "reason": "random only jitters simulated vehicle positions in the load-test harness; never used for tokens or ids",
+      "ticket": "SEC-247",
+      "added_by": "mrojas"
+    },
+    {
+      "tool": "kitewatch",
+      "rule": "KW-HDR-007",
+      "reason": "Missing CSP on the internal /debug/routes page, reachable from the office VPN only; to be removed with the 2026.09 release",
+      "expires": "2026-08-31",
+      "ticket": "SEC-262",
+      "added_by": "lmoreau"
+    }
+  ]
+}

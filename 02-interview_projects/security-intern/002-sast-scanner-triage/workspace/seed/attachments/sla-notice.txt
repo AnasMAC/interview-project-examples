@@ -1,0 +1,6 @@
+Bellpost support SLA (excerpt)
+
+Growth plan: first response within 4 business hours, resolution within 3 business days.
+Scale plan: first response within 1 business hour, resolution within 1 business day.
+Starter plan: first response within 1 business day, resolution within 5 business days.
+Times are quoted in the tenant timezone from the console settings.

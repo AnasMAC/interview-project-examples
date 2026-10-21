@@ -1,0 +1,98 @@
+{
+  "assets": [
+    {
+      "tenant": "north",
+      "asset_id": "a1",
+      "name": "API Gateway",
+      "hostname": "api.example.test",
+      "tags": [
+        "prod",
+        "api"
+      ],
+      "status": "active",
+      "risk": 80
+    },
+    {
+      "tenant": "north",
+      "asset_id": "a2",
+      "name": "Billing API",
+      "hostname": "billing.example.test",
+      "tags": [
+        "prod",
+        "api"
+      ],
+      "status": "active",
+      "risk": 80
+    },
+    {
+      "tenant": "north",
+      "asset_id": "a3",
+      "name": "Legacy API",
+      "hostname": "legacy.example.test",
+      "tags": [
+        "api",
+        "legacy"
+      ],
+      "status": "archived",
+      "risk": 90
+    },
+    {
+      "tenant": "north",
+      "asset_id": "a4",
+      "name": "Customer Portal",
+      "hostname": "portal.example.test",
+      "tags": [
+        "prod",
+        "web"
+      ],
+      "status": "active",
+      "risk": 60
+    },
+    {
+      "tenant": "north",
+      "asset_id": "a5",
+      "name": "Mobile API",
+      "hostname": "mobile.example.test",
+      "tags": [
+        "prod",
+        "api"
+      ],
+      "status": "active",
+      "risk": 40
+    },
+    {
+      "tenant": "south",
+      "asset_id": "s1",
+      "name": "Secret API",
+      "hostname": "secret.example.test",
+      "tags": [
+        "prod",
+        "api"
+      ],
+      "status": "active",
+      "risk": 99
+    },
+    {
+      "tenant": "north",
+      "asset_id": "bad1",
+      "name": "Broken",
+      "hostname": "broken.example.test",
+      "tags": [
+        "prod"
+      ],
+      "status": "active",
+      "risk": 101
+    },
+    {
+      "tenant": "north",
+      "asset_id": "a6",
+      "name": "Partner Feed",
+      "hostname": "feed.example.test",
+      "tags": [
+        "staging"
+      ],
+      "status": "active",
+      "risk": 0
+    }
+  ]
+}

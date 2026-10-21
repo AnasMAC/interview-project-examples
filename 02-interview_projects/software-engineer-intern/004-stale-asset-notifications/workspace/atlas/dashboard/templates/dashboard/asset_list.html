@@ -1,0 +1,108 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Assets{% endblock %}
+{% block content %}
+<h1>Assets <span class="count">{{ paginator.count }}</span></h1>
+<div class="list-layout">
+<aside class="sidebar">
+  <form class="filters" method="get" action="{% url 'dashboard:asset-list' %}">
+    <h2>Filters</h2>
+    <label for="f-q">Search key or label</label>
+    <input id="f-q" name="q" type="search" value="{{ selected.q.0 }}">
+    <fieldset>
+      <legend>Kind</legend>
+      {% for value, label in kinds %}
+      <label class="check"><input type="checkbox" name="kind" value="{{ value }}"{% if value in selected.kind %} checked{% endif %}> {{ label }}</label>
+      {% endfor %}
+    </fieldset>
+    {% if tags %}
+    <label for="f-tag">Tags (all of)</label>
+    <select id="f-tag" name="tag" multiple size="4">
+      {% for tag in tags %}<option value="{{ tag.name }}"{% if tag.name in selected.tag %} selected{% endif %}>{{ tag.name }}</option>{% endfor %}
+    </select>
+    {% endif %}
+    <label for="f-owner">Owner team (“-” for unowned)</label>
+    <input id="f-owner" name="owner" list="f-teams" value="{{ selected.owner.0 }}">
+    <datalist id="f-teams">{% for team in teams %}<option value="{{ team }}">{% endfor %}</datalist>
+    <label for="f-exposure">Exposure</label>
+    <select id="f-exposure" name="exposure">
+      <option value="">Any or none</option>
+      <option value="any"{% if selected.exposure.0 == 'any' %} selected{% endif %}>Any open exposure</option>
+      {% for value, label in rules %}<option value="{{ value }}"{% if selected.exposure.0 == value %} selected{% endif %}>{{ label }}</option>{% endfor %}
+    </select>
+    <label for="f-changed">Changed</label>
+    <select id="f-changed" name="changed_within">
+      <option value="">Any time</option>
+      <option value="24"{% if selected.changed_within.0 == '24' %} selected{% endif %}>In the last 24 hours</option>
+      <option value="168"{% if selected.changed_within.0 == '168' %} selected{% endif %}>In the last 7 days</option>
+    </select>
+    {% if selected.changed_since %}<input type="hidden" name="changed_since" value="{{ selected.changed_since.0 }}">{% endif %}
+    <label class="check"><input type="checkbox" name="include_archived" value="1"{% if selected.include_archived.0 == '1' %} checked{% endif %}> Include archived</label>
+    <div class="actions">
+      <button type="submit" class="primary">Apply</button>
+      <a href="{% url 'dashboard:asset-list' %}">Clear</a>
+    </div>
+  </form>
+
+  <section class="saved-views" aria-labelledby="saved-views-title">
+    <h2 id="saved-views-title">Saved views</h2>
+    <ul>
+      {% for view in saved_views %}
+      <li>
+        <a href="{% url 'dashboard:asset-list' %}?{{ view.querystring }}"{% if view.querystring == querystring %} aria-current="true"{% endif %}>{{ view.name }}</a>
+        {% if view.owner_id == user.pk %}
+        <form method="post" action="{% url 'dashboard:saved-views' %}" data-confirm="Delete this saved view?">
+          {% csrf_token %}<button type="submit" name="delete" value="{{ view.pk }}" class="link" aria-label="Delete {{ view.name }}">Delete</button>
+        </form>
+        {% else %}<span class="muted">shared</span>{% endif %}
+      </li>
+      {% empty %}<li class="muted">No saved views yet.</li>
+      {% endfor %}
+    </ul>
+    <form method="post" action="{% url 'dashboard:saved-views' %}">
+      {% csrf_token %}
+      <input type="hidden" name="querystring" value="{{ querystring }}">
+      <label for="sv-name">Save current filters as</label>
+      <input id="sv-name" name="name" maxlength="100" required>
+      <button type="submit">Save view</button>
+    </form>
+  </section>
+</aside>
+
+<section class="results" aria-label="Asset list">
+  {% if filter_error %}<p class="error" role="alert">{{ filter_error }}</p>{% endif %}
+  <p class="toolbar"><a href="{% url 'dashboard:asset-csv' %}{% if querystring %}?{{ querystring }}{% endif %}" download>Download CSV</a></p>
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th scope="col">Kind</th><th scope="col">Asset</th><th scope="col">Owner</th><th scope="col">Tags</th><th scope="col">Open exposures</th><th scope="col">Last seen</th></tr>
+    </thead>
+    <tbody>
+      {% for asset in assets %}
+      <tr{% if asset.archived_at %} class="archived"{% endif %}>
+        <td><span class="kind">{{ asset.get_kind_display }}</span></td>
+        <td>
+          <a href="{% url 'dashboard:asset-detail' asset.pk %}">{{ asset.label|default:asset.key }}</a>
+          {% if asset.label != asset.key %}<div class="muted mono">{{ asset.key }}</div>{% endif %}
+        </td>
+        {# TODO(rafael): badges someday for more states (only "locked" and the exposure count so far); keep them on .badge so atlas.css stays the one place for colours. #}
+        <td>{{ asset.owner_team|default:"—" }}{% if asset.owner_locked %} <span class="badge" title="Set by hand; rules leave it alone">locked</span>{% endif %}</td>
+        <td>{% for tag in asset.tags.all %}<span class="tag">{{ tag.name }}</span> {% endfor %}</td>
+        <td class="num">{% if asset.open_exposures %}<span class="badge badge-warn">{{ asset.open_exposures }}</span>{% else %}0{% endif %}</td>
+        <td><time datetime="{{ asset.last_seen_at|date:'c' }}">{{ asset.last_seen_at|date:"Y-m-d H:i" }}</time></td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="6" class="muted">No assets match these filters.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {% if is_paginated %}
+  <nav class="pagination" aria-label="Pages">
+    {% if page_obj.has_previous %}<a href="?{% if querystring %}{{ querystring }}&amp;{% endif %}page={{ page_obj.previous_page_number }}" rel="prev">Previous</a>{% endif %}
+    <span>Page {{ page_obj.number }} of {{ paginator.num_pages }}</span>
+    {% if page_obj.has_next %}<a href="?{% if querystring %}{{ querystring }}&amp;{% endif %}page={{ page_obj.next_page_number }}" rel="next">Next</a>{% endif %}
+  </nav>
+  {% endif %}
+</section>
+</div>
+{% endblock %}

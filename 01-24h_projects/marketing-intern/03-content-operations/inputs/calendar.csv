@@ -1,0 +1,8 @@
+item_id,campaign_day,local_time,channel,item,priority,owner
+CAL1,1,10:00,social,Requested educational post slot,flexible,Elin
+CAL2,1,16:00,social,Unrelated approved maintenance notice,fixed,Sol
+CAL3,2,10:00,email,Requested educational email slot,flexible,Elin
+CAL4,2,16:00,email,Unrelated approved service notice,fixed,Sol
+CAL5,2,16:00,social,Requested text carousel slot,flexible,Elin
+CAL6,1,09:00,landing,Requested FAQ available time,flexible,Elin
+CAL7,3,09:00,email,Unrelated approved monthly digest,fixed,Sol

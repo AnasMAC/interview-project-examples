@@ -1,0 +1,46 @@
+{
+  "schema": "nimbus.inventory/v2",
+  "generatedAt": "2026-10-28T04:00:12Z",
+  "account": {
+    "id": "acct-7f3k9q2mwd",
+    "legacyNumber": "4471-2210-0093",
+    "displayName": "harborview-prod",
+    "migratedAt": "2026-10-19T02:00:00Z"
+  },
+  "items": [
+    {
+      "resourceId": "i-0a91c3e5", "resourceType": "compute/instance", "displayName": "hvb-online-web-01",
+      "location": "ca-central-2", "lifecycle": "ACTIVE",
+      "addresses": [{"ip": "198.51.100.20", "scope": "public"}, {"ip": "10.20.1.11", "scope": "private"}],
+      "endpoints": ["online.harborview-bank.example.test"]
+    },
+    {
+      "resourceId": "lb-5d2e7710", "resourceType": "network/load_balancer", "displayName": "hvb-api-gateway",
+      "location": "ca-central-2", "lifecycle": "ACTIVE",
+      "addresses": [{"ip": "198.51.100.21", "scope": "public"}],
+      "endpoints": ["api.harborview-bank.example.test"]
+    },
+    {
+      "resourceId": "i-0b44d018", "resourceType": "compute/instance", "displayName": "hvb-vpn-01",
+      "location": "ca-central-2", "lifecycle": "ACTIVE",
+      "addresses": [{"ip": "198.51.100.30", "scope": "public"}, {"ip": "10.20.0.5", "scope": "private"}],
+      "endpoints": ["vpn.harborview-bank.example.test"]
+    },
+    {
+      "resourceId": "i-0c17aa62", "resourceType": "compute/instance", "displayName": "hvb-batch-03",
+      "location": "ca-east-1", "lifecycle": "TERMINATED",
+      "addresses": [{"ip": "10.21.8.40", "scope": "private"}], "endpoints": []
+    },
+    {
+      "resourceId": "bkt-hvb-statements", "resourceType": "storage/bucket", "displayName": "hvb-statements-archive",
+      "location": "ca-central-2", "lifecycle": "ACTIVE", "addresses": [],
+      "endpoints": ["hvb-statements-archive.objects.ca-central-2.nimbus.example.test"]
+    },
+    {
+      "resourceId": "i-0d3390fe", "resourceType": "compute/instance", "displayName": "hvb-reports-01",
+      "location": "ca-central-2", "lifecycle": "ACTIVE",
+      "addresses": [{"ip": "198.51.100.23", "scope": "public"}, {"ip": "10.20.1.30", "scope": "private"}],
+      "endpoints": ["reports.harborview-bank.example.test"]
+    }
+  ]
+}

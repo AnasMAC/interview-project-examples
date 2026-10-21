@@ -1,0 +1,142 @@
+{
+  "$schema": "https://docs.oasis-open.org/sarif/sarif/v2.1.0/errata01/os/schemas/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Thistle",
+          "version": "4.8.2",
+          "organization": "Thistle Static Analysis",
+          "rules": [
+            {
+              "id": "TH-DESER-PICKLE",
+              "shortDescription": {
+                "text": "Deserialization of untrusted data"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "cwe": "CWE-502",
+                "category": "security"
+              }
+            },
+            {
+              "id": "TH-PATH-TRAVERSAL",
+              "shortDescription": {
+                "text": "Path traversal"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "cwe": "CWE-22",
+                "category": "security"
+              }
+            },
+            {
+              "id": "TH-LOG-INJECT",
+              "shortDescription": {
+                "text": "Untrusted data written to logs unescaped"
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "cwe": "CWE-117",
+                "category": "security"
+              }
+            }
+          ]
+        }
+      },
+      "columnKind": "utf16CodeUnits",
+      "versionControlProvenance": [
+        {
+          "repositoryUri": "https://git.fernwick.example.test/routing/route-planner",
+          "revisionId": "e0ddfdce3d53001992c755fc783a7614a808914c"
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "TH-DESER-PICKLE",
+          "level": "error",
+          "message": {
+            "text": "bytes from Redis flow into pickle.loads()"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "planner/cache.py",
+                  "uriBaseId": "WORKSPACE"
+                },
+                "region": {
+                  "startLine": 52,
+                  "startColumn": 15
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "thistle/v1": "5b9ad8add3aa3796ad7881d169bddd63"
+          }
+        },
+        {
+          "ruleId": "TH-PATH-TRAVERSAL",
+          "level": "error",
+          "message": {
+            "text": "request.query['file'] flows into open()"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "planner/admin/export.py",
+                  "uriBaseId": "WORKSPACE"
+                },
+                "region": {
+                  "startLine": 71,
+                  "startColumn": 16
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "thistle/v1": "ff26ae4d99870896b06a37dbec393d6b"
+          }
+        },
+        {
+          "ruleId": "TH-LOG-INJECT",
+          "level": "note",
+          "message": {
+            "text": "route name from the request is logged raw"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "planner/api/eta_webhooks.py",
+                  "uriBaseId": "WORKSPACE"
+                },
+                "region": {
+                  "startLine": 88,
+                  "startColumn": 8
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "thistle/v1": "5910f14071430b36dbaa8b599abae863"
+          }
+        }
+      ],
+      "originalUriBaseIds": {
+        "WORKSPACE": {
+          "uri": "file:///C:/builds/routing/route-planner/"
+        }
+      }
+    }
+  ]
+}

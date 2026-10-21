@@ -1,0 +1,13 @@
+event_id,occurred_at_utc,contact_id,event_type,email,event_coordination,marketing_updates
+E01,2026-11-03T09:00:00Z,C01,request,c01@example.test,yes,no
+E02,2026-11-03T09:05:00Z,C02,request,c02@example.test,yes,yes
+E03,2026-11-03T09:06:00Z,C01,request,c01@example.test,yes,no
+E04,2026-11-03T09:10:00Z,C03,request,c03@example.test,yes,yes
+E05,2026-11-03T09:15:00Z,C04,request,c04@example.test,yes,no
+E06,2026-11-04T10:00:00Z,C02,cancel,c02@example.test,yes,yes
+E07,2026-11-04T10:30:00Z,C04,accept_offer,c04@example.test,yes,no
+E08,2026-11-04T10:45:00Z,C05,request,c05@example.test,yes,yes
+E09,2026-11-04T11:00:00Z,C03,unsubscribe_marketing,c03@example.test,yes,no
+E10,2026-11-04T11:15:00Z,C06,request,c06.example.test,yes,no
+E11,2026-11-04T11:20:00Z,C07,request,c07@example.test,yes,no
+E12,2026-11-04T13:00:00Z,C08,request,c08@example.test,yes,no

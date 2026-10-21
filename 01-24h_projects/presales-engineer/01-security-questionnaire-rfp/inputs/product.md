@@ -1,0 +1,21 @@
+# Fictional Lantern product facts (authoritative as of 2026-06-01)
+
+These facts override every other source, including the answer library. If a question is not covered here, do not guess; follow the escalation rules.
+
+- **P1 — Mobile analysis:** Lantern performs static and dynamic analysis of Android (APK and AAB) and iOS (IPA) builds that the customer is authorized to test.
+- **P2 — iOS dynamic analysis:** Dynamic analysis of iOS requires a development- or ad-hoc-signed IPA. App Store-encrypted IPAs (downloaded from the App Store) receive static analysis only.
+- **P3 — Dependencies:** Lantern identifies third-party libraries inside mobile builds and exports a CycloneDX SBOM. SPDX export is not available.
+- **P4 — Web and API testing:** Lantern performs authenticated dynamic testing (DAST) of customer-authorized web applications and REST APIs, including OpenAPI 3 specification import. Lantern does **not** perform source-code static analysis (SAST) of web or backend repositories. GraphQL endpoints are scanned only as generic HTTP; there are no GraphQL-specific tests.
+- **P5 — Web authentication:** Scans authenticate with a recorded login sequence or a static bearer token header. Lantern cannot complete MFA challenges (TOTP, SMS or push) during a scan. MFA-protected applications require a test account with MFA disabled, or a bearer token.
+- **P6 — Findings:** Severity is critical, high, medium, low or info. Status is open, confirmed, false_positive, fixed or risk_accepted. Severity is a prioritization label, not proof of exploitability. Lantern does not guarantee detection of all vulnerabilities, a secure application or any compliance certification (for example PCI DSS).
+- **P7 — Exports:** Dashboard, JSON, CSV and SARIF 2.1.0.
+- **P8 — Native integrations:** Jira Cloud with two-way status sync, and Slack webhook notifications. P8 and P9 together are the complete list of native integrations. ServiceNow: see P15.
+- **P9 — CI/CD:** The `lantern` CLI (v3) runs in GitHub Actions, GitLab CI, Jenkins and Azure DevOps Pipelines. `--fail-on <severity>` returns exit code 1 when at least one open finding is at or above that severity, and 0 otherwise; 2 means scan error or timeout; 3 means authentication/configuration error. The API key is read from the `LANTERN_API_KEY` environment variable, which should be stored as a masked/secret CI variable. `--wait` blocks for at most 60 minutes.
+- **P10 — Plans and identity:** Team plan: up to 5 apps, no SSO, fixed 365-day data retention. Enterprise plan: SAML 2.0 SSO with any SAML 2.0 identity provider; data retention configurable from 30 to 365 days (default 365). SCIM provisioning is not available on any plan and is not a roadmap item. **The plan proposed to Northwind is Enterprise.**
+- **P11 — Hosting:** SaaS only. The region (EU-Frankfurt or US) is chosen at tenant creation; all tenant data, including uploaded builds, scan results and backups, is stored and processed in that region. No on-premises, private-cloud or air-gapped deployment exists.
+- **P12 — Encryption:** Customer data is encrypted at rest and in transit. Algorithm and key-management details are not in this fact sheet.
+- **P13 — Certifications:** A SOC 2 Type II report is available under NDA. Lantern is **not** ISO/IEC 27001 certified; certification work is in progress with no committed date. No FedRAMP authorization.
+- **P14 — Penetration testing and sub-processors:** An annual third-party penetration test is performed. Its executive summary is available under NDA; the full report is not shared externally. The sub-processor list is available on request without an NDA.
+- **P15 — Exploring (no committed date):** ServiceNow integration; GraphQL-specific testing. Approved wording: “Not available today. This is under exploration and Lantern has not committed to a delivery date.” Nothing else may be said about timing.
+- **P16 — Contract and commercial terms:** Liability, indemnity, uptime SLA, service credits and DPA changes are owned by Legal. Pricing and discounts are owned by the account executive. A solutions engineer cannot commit to any of them.
+- **P17 — Termination:** On contract termination, customer data is deleted within 30 days. The customer may export data before termination.

@@ -1,0 +1,17 @@
+# Code ownership for payments/checkout-api. Ledger assigns findings to the
+# team of the last matching rule; unmatched paths fall back to the repository
+# owner (Payments). One team per rule.
+
+*                           @fernwick/payments
+
+# Login and session handling is shared code from the Identity team, vendored
+# here until auth-gateway exposes it as a library (Identity reviews changes).
+/src/checkout/auth/         @fernwick/identity
+/src/checkout/session.py    @fernwick/identity
+
+# Container image and CI templates come from build-images.
+Dockerfile                  @fernwick/platform
+/.ci/                       @fernwick/platform
+
+# Refunds stay with Payments even though they sit next to the auth helpers.
+/src/checkout/auth/refund_tokens.py  @fernwick/payments

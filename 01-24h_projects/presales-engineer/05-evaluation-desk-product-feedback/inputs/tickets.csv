@@ -1,0 +1,8 @@
+ticket_id,opened,eval_id,source_note,title,type_as_reported,status,support_note
+T-279,2026-05-12,,,SARIF rule descriptors missing helpUri,bug,fixed_in_3.8.2,Added helpUri to SARIF rule descriptors. Unrelated to upload validation.
+T-287,2026-05-28,E4,N02,Jira status not syncing back to Lantern,bug,fixed_in_3.8.2,Root cause: Jira workflows with custom status names were ignored on sync-back. Fixed in 3.8.2. Customer has not retested.
+T-311,2026-06-02,E1,N04,GitHub code scanning rejects Lantern SARIF upload,bug,confirmed,Reproduced by support: mobile scans with more than 100 findings export SARIF with an empty rules array; GitHub rejects the file. Scans with 100 or fewer findings export valid SARIF. JSON and CSV exports are unaffected. No target release set.
+T-318,2026-06-04,E3,N05,Lantern SARIF fails GitHub validation,bug,new,Not yet triaged.
+T-320,2026-05-29,E2,N03,Authenticated web scan never gets past login,bug,awaiting_customer,The recorded login profile uses an account with authenticator-app MFA. The scanner cannot complete the one-time-code step. Asked customer for a test account or token.
+T-322,2026-05-27,E5,N01,CLI broken in pipeline (exit code 3),bug,awaiting_customer,Pipeline log shows variable LANTERN_TOKEN is set and LANTERN_API_KEY is empty. Exit 3 is the documented auth/config error.
+T-325,2026-06-04,E3,N05,GraphQL mutation testing,feature_request,new,Not yet triaged.

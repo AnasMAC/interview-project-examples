@@ -1,0 +1,10 @@
+# Remediation SLA per normalized severity, in business days (Mon-Fri minus the
+# holidays in config/holidays.toml, Europe/Berlin calendar), counted from the
+# day a finding is first seen. Policy owner: Samuel Okafor (AppSec).
+# Agreed with engineering managers 2026-03-02; info findings have no SLA.
+
+[days]
+critical = 3
+high = 10
+medium = 30
+low = 60

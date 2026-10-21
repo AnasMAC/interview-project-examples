@@ -1,0 +1,8 @@
+item_id,type,requirement,text
+AD01,question,must,"Can the solution scan the Android AAB produced by our GitHub Actions pipeline and fail the build when a critical finding is open?"
+AD02,question,should,"Does the solution offer a native integration that creates Azure DevOps Boards work items from findings?"
+AD03,question,must,"Confirm a 25% discount on list price for a three-year commitment."
+AD04,question,should,"Will you commit to delivering GraphQL-specific testing before our go-live on 2026-12-01?"
+AD05,question,info,"Can you export a CycloneDX SBOM for our iOS app?"
+AD06,question,must,"Confirm that all Northwind data is deleted within 30 days of contract termination."
+AD07,update,must,"Update to Q05 (still a must): Northwind security policy now prohibits disabling MFA on any account in any Northwind environment, and prohibits static bearer tokens for the customer portal. The scanner must complete TOTP challenges itself. Re-answer Q05."

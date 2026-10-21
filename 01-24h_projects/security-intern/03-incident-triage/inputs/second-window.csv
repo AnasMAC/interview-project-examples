@@ -1,0 +1,9 @@
+event_id,event_time,actor,session,source_ip,action,result,resource,records,request_id
+NW-01,2026-09-15T09:00:00Z,leo,-,198.51.100.11,auth,failure,-,0,N-01
+NW-02,2026-09-15T09:01:00Z,leo,-,198.51.100.11,auth,failure,-,0,N-02
+NW-03,2026-09-15T10:02:00+01:00,leo,-,198.51.100.11,auth,failure,-,0,N-03
+NW-04,2026-09-15T09:03:00Z,leo,S-leo-new,198.51.100.11,auth,success,-,0,N-04
+NW-05,2026-09-15T09:04:00Z,leo,S-leo-new,198.51.100.11,export,allowed,reports/blue,2,N-05
+NW-06,2026-09-15T09:05:00Z,svc-backup,S-backup-new,203.0.113.10,export,allowed,backup/red,200,N-06
+NW-07,2026-09-15T09:06:00Z,svc-backup,S-backup-new,203.0.113.10,export,allowed,reports/blue,101,N-07
+NW-08,2026-09-15T09:07:00Z,maya,S-maya-new,198.51.100.10,auth,success,-,0,N-08

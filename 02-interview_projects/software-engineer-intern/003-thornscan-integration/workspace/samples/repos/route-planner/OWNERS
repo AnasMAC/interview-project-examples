@@ -1,0 +1,15 @@
+# Code ownership for routing/route-planner. Patterns are repo-relative, so
+# they survive a move to another Git group. Last matching rule wins.
+
+*                           @fernwick/routing
+
+# ETA publishing feeds the shipment event stream owned by Tracking.
+/planner/publish/           @fernwick/tracking
+/planner/api/eta_webhooks.py  @fernwick/tracking
+
+# Fleet maintains the vehicle constraint loaders.
+/planner/constraints/vehicles/  @fernwick/fleet
+
+# Infrastructure
+Dockerfile                  @fernwick/platform
+/deploy/**/*.yaml           @fernwick/platform

@@ -1,0 +1,18 @@
+task_id,eval_id,task,hours,deadline_utc,kind
+K01,E1,PoC readout meeting with Orbis Pay,1.0,2026-06-10 15:00,booked
+K02,E4,PoC readout meeting with Brightwater Logistics,1.0,2026-06-11 10:00,booked
+K03,internal,Weekly pipeline review with sales manager,1.0,2026-06-08 16:00,booked
+K04,E1,Guide upload of a development or ad-hoc signed IPA and verify dynamic results,1.5,2026-06-10 12:00,
+K05,E1,Prepare readout evidence pack against C1-C5,2.0,2026-06-10 15:00,
+K06,E2,Configure web authentication with an MFA-free test account or bearer token,1.5,2026-06-11 17:00,
+K07,E2,Rerun authenticated portal scan and review results for C3,1.5,2026-06-12 12:00,
+K08,E3,Enablement session on the SARIF workaround for C5,2.0,2026-06-16 17:00,
+K09,E3,Write a GraphQL coverage and scope note for the platform team,1.0,,
+K10,E4,Retest Jira sync-back on release 3.8.2,0.5,2026-06-11 10:00,
+K11,E4,Prepare readout evidence pack against C1-C3,1.5,2026-06-11 10:00,
+K12,E5,Live walkthrough of the CLI configuration,1.0,,
+K13,E5,Success-criteria workshop,2.0,,
+K14,all,File product feedback entries,0.5 per entry,2026-06-12 17:00,
+K15,E3,Build a tailored executive demo for Tamarind leadership,2.0,,
+K16,E2,Technical follow-up email to Rania,0.25,2026-06-08 17:00,
+K17,E5,Technical follow-up email to Theo,0.25,2026-06-08 17:00,

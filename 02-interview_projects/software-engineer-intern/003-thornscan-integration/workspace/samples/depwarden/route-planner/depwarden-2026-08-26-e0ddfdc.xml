@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dw:report xmlns:dw="http://schemas.depwarden.example.test/report/3" tool-version="3.9.1" generated="2026-08-26T09:15:03Z">
+  <dw:project name="route-planner" ecosystem="pypi" manifest="requirements.in"/>
+  <dw:dependencies>
+    <dw:dependency name="geojsonkit" requested="&gt;=0.8,&lt;1.0" direct="true" scope="runtime">
+      <dw:path>route-planner &gt; geojsonkit &gt;=0.8,&lt;1.0</dw:path>
+      <dw:vulnerability id="DWA-2026-0098" severity="HIGH" cvss="7.5">
+        <dw:cwe>CWE-1333</dw:cwe>
+        <dw:title>Coordinate parser backtracks on long numbers</dw:title>
+        <dw:affected>&lt;0.9.4</dw:affected>
+        <dw:fixed>0.9.4</dw:fixed>
+      </dw:vulnerability>
+    </dw:dependency>
+    <dw:dependency name="yamlette" requested="~=5.3" direct="true" scope="runtime">
+      <dw:path>route-planner &gt; yamlette ~=5.3</dw:path>
+      <dw:vulnerability id="DWA-2025-0544" severity="CRITICAL" cvss="9.8">
+        <dw:cwe>CWE-502</dw:cwe>
+        <dw:title>load() constructs arbitrary objects by default</dw:title>
+        <dw:affected>&lt;5.4.0</dw:affected>
+        <dw:fixed>5.4.0</dw:fixed>
+      </dw:vulnerability>
+    </dw:dependency>
+    <dw:dependency name="msgcache" requested="==2.4.1" direct="true" scope="runtime">
+      <dw:path>route-planner &gt; msgcache ==2.4.1</dw:path>
+      <dw:vulnerability id="DWA-2026-0120" severity="MEDIUM" cvss="5.9">
+        <dw:cwe>CWE-400</dw:cwe>
+        <dw:title>Unbounded frame size in the decoder</dw:title>
+        <dw:affected>&gt;=2.0.0,&lt;2.4.3</dw:affected>
+        <dw:fixed>2.4.3</dw:fixed>
+      </dw:vulnerability>
+    </dw:dependency>
+    <dw:dependency name="ortools-lite" requested="&gt;=9.8" direct="true" scope="runtime"/>
+  </dw:dependencies>
+</dw:report>

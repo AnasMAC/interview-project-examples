@@ -1,0 +1,5 @@
+record_id,contact_id,attendance_status,recording_status,observed_at_utc
+AT01,C01,attended,not_ready,2026-11-06T09:00:00Z
+AT02,C03,attended,not_ready,2026-11-06T09:00:00Z
+AT03,C04,no_show,not_ready,2026-11-06T09:00:00Z
+AT04,C02,not_applicable_cancelled,not_ready,2026-11-06T09:00:00Z

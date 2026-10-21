@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in - Bellpost</title>
+  <style>
+    body { margin: 0; font: 15px/1.45 system-ui, sans-serif; background: #f4f6f8; color: #1d2329; }
+    main { max-width: 22rem; margin: 12vh auto; padding: 1.5rem; background: #fff; border: 1px solid #e3e8ec; }
+    label { display: block; margin: .6rem 0 .2rem; }
+    input { width: 100%; padding: .4rem; box-sizing: border-box; }
+    button { margin-top: 1rem; padding: .45rem .9rem; }
+    .error { color: #8b1d1d; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Bellpost</h1>
+  <p class="meta">Sign in to the agent console.</p>
+  {% if error %}<p class="error">{{ error }}</p>{% endif %}
+  <form method="post" action="/admin/login">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" autocomplete="username" required>
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" autocomplete="current-password" required>
+    <button type="submit">Sign in</button>
+  </form>
+</main>
+</body>
+</html>

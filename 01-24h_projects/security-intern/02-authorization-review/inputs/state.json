@@ -1,0 +1,46 @@
+{
+  "actors": {
+    "red-editor": {
+      "tenant": "red",
+      "role": "editor",
+      "active": true
+    },
+    "red-viewer": {
+      "tenant": "red",
+      "role": "viewer",
+      "active": true
+    },
+    "red-disabled": {
+      "tenant": "red",
+      "role": "editor",
+      "active": false
+    },
+    "red-admin": {
+      "tenant": "red",
+      "role": "admin",
+      "active": true
+    },
+    "blue-editor": {
+      "tenant": "blue",
+      "role": "editor",
+      "active": true
+    },
+    "blue-admin": {
+      "tenant": "blue",
+      "role": "admin",
+      "active": true
+    }
+  },
+  "tasks": {
+    "task-red": {
+      "tenant": "red",
+      "status": "open",
+      "title": "Red launch"
+    },
+    "task-blue": {
+      "tenant": "blue",
+      "status": "open",
+      "title": "Blue budget"
+    }
+  }
+}

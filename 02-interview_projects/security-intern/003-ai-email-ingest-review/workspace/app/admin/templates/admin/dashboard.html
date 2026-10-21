@@ -1,0 +1,17 @@
+{% extends "admin/base.html" %}
+{% block title %}Console{% endblock %}
+{% block content %}
+<h1>Console</h1>
+<p class="meta">Signed in as {{ user.name|default('') }} ({{ user.role|default('') }}).</p>
+<table>
+  <thead>
+    <tr><th>Status</th><th>Tickets</th></tr>
+  </thead>
+  <tbody>
+    {% for status, count in (status_counts|default({})).items() %}
+    <tr><td>{{ status }}</td><td>{{ count }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+<p><a href="/admin/tickets">All tickets</a> - <a href="/admin/reports">Reports</a></p>
+{% endblock %}

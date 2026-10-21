@@ -1,0 +1,59 @@
+# Review routing. The last matching pattern wins.
+# Handles are directory names at brindlecove.example.test:
+#   @ochen Olivia Chen (CTO)            @dmensah Daniel Mensah (backend)
+#   @atanaka Aiko Tanaka (backend)      @rsouza Rafael Souza (full-stack)
+#   @flindqvist Freya Lindqvist (product)  @ohaddad Omar Haddad (customer success)
+#   @zpark Zoe Park (contractor)
+
+*                               @ochen
+
+# core: foundations and the data model
+/atlas/core/                    @ochen
+/atlas/settings/                @ochen
+/atlas/urls.py                  @ochen
+/atlas/*/models.py              @ochen @atanaka
+/atlas/*/migrations/            @ochen
+/tests/conftest.py              @ochen
+/tests/factories.py             @ochen
+
+# components
+/atlas/api/                     @dmensah
+/atlas/assets/filters.py        @dmensah
+/atlas/assets/ownership.py      @dmensah
+/atlas/notify/                  @dmensah
+/mockhook/                      @dmensah
+/atlas/importers/               @atanaka
+# Written by Zoe Park under contract; Aiko reviews everything that lands here.
+/atlas/importers/ct_feed.py     @atanaka @zpark
+/atlas/merge/                   @atanaka
+/atlas/jobs/                    @atanaka
+/atlas/exposure/                @atanaka
+/fixtures/                      @atanaka
+/atlas/dashboard/               @rsouza
+/atlas/core/management/commands/seed.py  @ochen
+/scripts/                       @ochen
+
+# tests follow their component
+/tests/api/                     @dmensah
+/tests/notify/                  @dmensah
+/tests/importers/               @atanaka
+/tests/merge/                   @atanaka
+/tests/jobs/                    @atanaka
+/tests/exposure/                @atanaka
+/tests/dashboard/               @rsouza
+/tests/seed/                    @ochen
+
+# platform
+/Dockerfile                     @ochen
+/docker-compose.yml             @ochen
+/Makefile                       @ochen
+/requirements*.txt              @ochen @dmensah
+/pyproject.toml                 @ochen
+
+# docs
+/docs/architecture.md           @ochen
+/docs/adr/                      @ochen
+/docs/runbook.md                @ochen
+/docs/api.md                    @dmensah
+/docs/requests/                 @flindqvist @ohaddad
+/CHANGELOG.md                   @ochen @dmensah

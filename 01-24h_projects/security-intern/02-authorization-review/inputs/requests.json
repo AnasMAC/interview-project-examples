@@ -1,0 +1,14 @@
+[
+  {
+    "request_id": "normal-edit",
+    "actor_id": "red-editor",
+    "task_id": "task-red",
+    "status": "done"
+  },
+  {
+    "request_id": "normal-viewer-denied",
+    "actor_id": "red-viewer",
+    "task_id": "task-red",
+    "status": "open"
+  }
+]

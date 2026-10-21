@@ -1,0 +1,32 @@
+{
+  "format": "nimbus.inventory",
+  "version": 1,
+  "exported_at": "2026-09-30T04:00:00Z",
+  "account": {"number": "4471-2210-0093", "alias": "harborview-prod"},
+  "resources": [
+    {
+      "id": "i-0a91c3e5", "type": "compute.instance", "name": "hvb-online-web-01", "region": "ca-central-2",
+      "state": "running", "public_ip": "198.51.100.20", "private_ip": "10.20.1.11",
+      "dns_names": ["online.harborview-bank.example.test"]
+    },
+    {
+      "id": "lb-5d2e7710", "type": "network.load_balancer", "name": "hvb-api-gateway", "region": "ca-central-2",
+      "state": "running", "public_ip": "198.51.100.21", "public_ipv6": null,
+      "dns_names": ["api.harborview-bank.example.test"]
+    },
+    {
+      "id": "i-0b44d018", "type": "compute.instance", "name": "hvb-vpn-01", "region": "ca-central-2",
+      "state": "running", "public_ip": "198.51.100.30", "private_ip": "10.20.0.5",
+      "dns_names": ["vpn.harborview-bank.example.test"]
+    },
+    {
+      "id": "i-0c17aa62", "type": "compute.instance", "name": "hvb-batch-03", "region": "ca-east-1",
+      "state": "running", "public_ip": null, "private_ip": "10.21.8.40", "dns_names": []
+    },
+    {
+      "id": "bkt-hvb-statements", "type": "storage.bucket", "name": "hvb-statements-archive", "region": "ca-central-2",
+      "state": "running", "public_ip": null,
+      "dns_names": ["hvb-statements-archive.objects.ca-central-2.nimbus.example.test"]
+    }
+  ]
+}

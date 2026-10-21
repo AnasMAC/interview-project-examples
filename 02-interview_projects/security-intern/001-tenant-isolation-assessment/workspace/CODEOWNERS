@@ -1,0 +1,52 @@
+# Review routing for Glasswick/bellpost. The last matching pattern wins.
+# Keep in sync with docs/architecture.md when ownership changes.
+
+*                               @iris @tomas
+
+# Core, data model and migrations
+/app/__init__.py                @iris
+/app/config.py                  @iris
+/app/db.py                      @iris
+/app/clock.py                   @iris
+/app/logging.py                 @iris
+/app/errors.py                  @iris
+/app/models.py                  @tomas
+/migrations/                    @tomas
+
+# Component ownership
+/app/api/                       @tomas
+/app/auth/                      @priya
+/app/tenancy.py                 @priya
+/app/permissions.py             @priya
+/app/attachments/               @daniel
+/app/admin/                     @hannah
+/app/legacy/                    @hannah
+/app/ingest/                    @kofi
+/app/webhooks/                  @sofia
+/app/audit/                     @emre
+/seed/                          @elena
+/tests/                         @elena
+
+# Tools and platform
+/tools/mockhook/                @sofia
+/tools/mock_metadata/           @sofia
+/tools/csv-import/              @sofia
+/docker-compose.yml             @jonas
+/Makefile                       @jonas
+/requirements.txt               @jonas
+/requirements-dev.txt           @jonas
+/pyproject.toml                 @jonas
+/alembic.ini                    @jonas
+/.github/                       @jonas
+/.env.example                   @jonas
+
+# Documentation
+/docs/                          @weiling
+/docs/architecture.md           @iris
+/docs/security-notes.md         @emre
+/docs/runbook.md                @marcus
+/docs/product/                  @amara
+/docs/product/roadmap.md        @louis
+
+# Entry points kept for the mobile companion app 3.x line
+/app/legacy/ticket_search.py    @marcus @hannah

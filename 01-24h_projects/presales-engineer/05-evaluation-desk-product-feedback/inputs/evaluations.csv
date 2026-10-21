@@ -1,0 +1,6 @@
+eval_id,prospect,stage,est_arr_usd,poc_start,poc_end,criteria_met,criteria_total,ae_owner,customer_contact,last_customer_contact,ae_blocker_field
+E1,Orbis Pay,poc_active,72000,2026-05-27,2026-06-10,3,5,Ines,Karim (Mobile Security Lead),2026-06-05,iOS dynamic not running
+E2,Kestrel Health,poc_active,48000,2026-05-29,2026-06-12,2,4,Malik,Rania (AppSec Lead),2026-05-29,Scanner broken on login; needs ServiceNow
+E3,Tamarind Retail,poc_active,90000,2026-06-03,2026-06-17,4,6,Ines,Leo (Platform Engineering Manager),2026-06-04,
+E4,Brightwater Logistics,poc_active,24000,2026-05-28,2026-06-11,3,3,Malik,Amal (QA Lead),2026-06-05,Jira bug
+E5,Solenne Media,trial_setup,36000,,,0,0,Ines,Theo (DevOps Engineer),2026-05-27,CLI broken

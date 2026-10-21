@@ -1,0 +1,317 @@
+{
+  "export": {
+    "tenant": "orchid-poc",
+    "round": 2,
+    "generated_at": "2026-06-14T18:00:00Z",
+    "format": "lantern-findings-json/1",
+    "note": "One row per detection. fingerprint is the stable finding identity across rows and scans."
+  },
+  "scans": [
+    {
+      "scan_id": "S-1201",
+      "app": "orchid-wallet-android",
+      "build": "4.8.2",
+      "source": "gitlab-ci",
+      "completed_at": "2026-06-11T10:14:00Z",
+      "analysis": [
+        "static",
+        "dynamic"
+      ],
+      "notes": ""
+    },
+    {
+      "scan_id": "S-1202",
+      "app": "orchid-wallet-ios",
+      "build": "4.8.2 (App Store-encrypted IPA)",
+      "source": "dashboard",
+      "completed_at": "2026-06-12T09:31:00Z",
+      "analysis": [
+        "static"
+      ],
+      "notes": "Dynamic analysis skipped: IPA is App Store-encrypted"
+    },
+    {
+      "scan_id": "S-1203",
+      "app": "orchid-portal-web",
+      "target": "https://portal.orchid.test",
+      "source": "dashboard",
+      "completed_at": "2026-06-13T16:48:00Z",
+      "analysis": [
+        "dynamic"
+      ],
+      "authenticated": true,
+      "pages_crawled": 88,
+      "authenticated_pages": 41,
+      "scope_excludes": [
+        "/legacy/*"
+      ],
+      "notes": "Bearer-token auth profile 'orchid-qa-token'; authenticated pages include /account/*"
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "R2-001",
+      "fingerprint": "and-1a01",
+      "app": "orchid-wallet-android",
+      "analysis": "static",
+      "severity": "high",
+      "title": "Hard-coded API key in app resources",
+      "location": "res/values/strings.xml: payments_api_key",
+      "status": "fixed",
+      "triage_note": "Not detected in rescan of build 4.8.2",
+      "jira_key": "ORC-11"
+    },
+    {
+      "finding_id": "R2-002",
+      "fingerprint": "and-1a02",
+      "app": "orchid-wallet-android",
+      "analysis": "static",
+      "severity": "critical",
+      "title": "Exported activity reachable by deep link without authentication",
+      "location": "com.orchid.pay.ConfirmActivity",
+      "status": "confirmed",
+      "triage_note": "Fix planned for 4.9.0; still present in 4.8.2",
+      "jira_key": "ORC-12"
+    },
+    {
+      "finding_id": "R2-003",
+      "fingerprint": "and-1a03",
+      "app": "orchid-wallet-android",
+      "analysis": "dynamic",
+      "severity": "high",
+      "title": "Cleartext HTTP traffic observed",
+      "location": "http://metrics.orchid.test/v1/beacon",
+      "status": "false_positive",
+      "triage_note": "Beacon host only used by the internal QA flavor; release flavor uses HTTPS",
+      "jira_key": "ORC-13"
+    },
+    {
+      "finding_id": "R2-004",
+      "fingerprint": "and-1a04",
+      "app": "orchid-wallet-android",
+      "analysis": "static",
+      "severity": "medium",
+      "title": "WebView exposes JavaScript interface",
+      "location": "com.orchid.pay.help.HelpWebView",
+      "status": "risk_accepted",
+      "triage_note": "Help content is bundled and signed; accepted until 4.9.0",
+      "jira_key": null
+    },
+    {
+      "finding_id": "R2-005",
+      "fingerprint": "and-1a05",
+      "app": "orchid-wallet-android",
+      "analysis": "dynamic",
+      "severity": "medium",
+      "title": "Session token written to device log",
+      "location": "logcat tag OrchidAuth",
+      "status": "fixed",
+      "triage_note": "Not detected in rescan of build 4.8.2",
+      "jira_key": null
+    },
+    {
+      "finding_id": "R2-006",
+      "fingerprint": "and-1a06",
+      "app": "orchid-wallet-android",
+      "analysis": "static",
+      "severity": "low",
+      "title": "Application allows Android backup",
+      "location": "AndroidManifest.xml: allowBackup=true",
+      "status": "open",
+      "triage_note": "",
+      "jira_key": null
+    },
+    {
+      "finding_id": "R2-007",
+      "fingerprint": "and-1a07",
+      "app": "orchid-wallet-android",
+      "analysis": "static",
+      "severity": "high",
+      "title": "Third-party library with known vulnerability",
+      "location": "okhttp 3.12.0 (dependency)",
+      "status": "open",
+      "triage_note": "Jira ORC-17 moved to Won't Do on 2026-06-12; no Lantern change",
+      "jira_key": "ORC-17"
+    },
+    {
+      "finding_id": "R2-008",
+      "fingerprint": "and-2b01",
+      "app": "orchid-wallet-android",
+      "analysis": "static",
+      "severity": "high",
+      "title": "Custom TrustManager accepts all certificates",
+      "location": "com.partnersdk.net.LaxTrustManager",
+      "status": "open",
+      "triage_note": "New in build 4.8.2 (partner SDK added)",
+      "jira_key": null
+    },
+    {
+      "finding_id": "R2-009",
+      "fingerprint": "and-2b02",
+      "app": "orchid-wallet-android",
+      "analysis": "static",
+      "severity": "low",
+      "title": "Debug log statements in release build",
+      "location": "com.partnersdk.util.DebugLog",
+      "status": "risk_accepted",
+      "triage_note": "Partner SDK logging; no sensitive fields observed",
+      "jira_key": null
+    },
+    {
+      "finding_id": "R2-010",
+      "fingerprint": "ios-1c01",
+      "app": "orchid-wallet-ios",
+      "analysis": "static",
+      "severity": "high",
+      "title": "App Transport Security allows arbitrary loads",
+      "location": "Info.plist: NSAllowsArbitraryLoads=true",
+      "status": "confirmed",
+      "triage_note": "Confirmed by Orchid AppSec; fix not yet scheduled",
+      "jira_key": "ORC-15"
+    },
+    {
+      "finding_id": "R2-011",
+      "fingerprint": "ios-1c02",
+      "app": "orchid-wallet-ios",
+      "analysis": "static",
+      "severity": "medium",
+      "title": "Keychain item accessible when device is locked",
+      "location": "AuthStore.swift: kSecAttrAccessibleAlways",
+      "status": "fixed",
+      "triage_note": "Not detected in rescan; build 4.8.2 (App Store build)",
+      "jira_key": null
+    },
+    {
+      "finding_id": "R2-012",
+      "fingerprint": "ios-1c03",
+      "app": "orchid-wallet-ios",
+      "analysis": "static",
+      "severity": "low",
+      "title": "No jailbreak detection",
+      "location": "binary-wide",
+      "status": "risk_accepted",
+      "triage_note": "Out of scope for current threat model",
+      "jira_key": null
+    },
+    {
+      "finding_id": "R2-013",
+      "fingerprint": "ios-1c04",
+      "app": "orchid-wallet-ios",
+      "analysis": "static",
+      "severity": "medium",
+      "title": "Third-party SDK with known vulnerability",
+      "location": "AnalyticsKit 2.1.4 (dependency)",
+      "status": "open",
+      "triage_note": "",
+      "jira_key": null
+    },
+    {
+      "finding_id": "R2-014",
+      "fingerprint": "ios-1c05",
+      "app": "orchid-wallet-ios",
+      "analysis": "static",
+      "severity": "high",
+      "title": "Hard-coded secret in Info.plist",
+      "location": "Info.plist: StripePublishableKey",
+      "status": "false_positive",
+      "triage_note": "Publishable key is public by design",
+      "jira_key": null
+    },
+    {
+      "finding_id": "R2-015",
+      "fingerprint": "web-1d01",
+      "app": "orchid-portal-web",
+      "analysis": "dynamic",
+      "severity": "medium",
+      "title": "Strict-Transport-Security header missing",
+      "location": "https://portal.orchid.test/",
+      "status": "confirmed",
+      "triage_note": "Confirmed; CDN change requested",
+      "jira_key": null
+    },
+    {
+      "finding_id": "R2-016",
+      "fingerprint": "web-1d02",
+      "app": "orchid-portal-web",
+      "analysis": "dynamic",
+      "severity": "high",
+      "title": "Reflected cross-site scripting",
+      "location": "https://portal.orchid.test/search?q=",
+      "status": "fixed",
+      "triage_note": "Not detected in rescan",
+      "jira_key": "ORC-14"
+    },
+    {
+      "finding_id": "R2-017",
+      "fingerprint": "web-1d04",
+      "app": "orchid-portal-web",
+      "analysis": "dynamic",
+      "severity": "low",
+      "title": "Cookie without SameSite attribute",
+      "location": "https://portal.orchid.test/ (cookie: locale)",
+      "status": "open",
+      "triage_note": "",
+      "jira_key": null
+    },
+    {
+      "finding_id": "R2-018",
+      "fingerprint": "web-2e01",
+      "app": "orchid-portal-web",
+      "analysis": "dynamic",
+      "severity": "critical",
+      "title": "Insecure direct object reference on statements",
+      "location": "https://portal.orchid.test/account/statements/{id}",
+      "status": "confirmed",
+      "triage_note": "Confirmed: another test user's statement returned",
+      "jira_key": "ORC-18"
+    },
+    {
+      "finding_id": "R2-019",
+      "fingerprint": "web-2e01",
+      "app": "orchid-portal-web",
+      "analysis": "dynamic",
+      "severity": "critical",
+      "title": "Insecure direct object reference on statements",
+      "location": "https://portal.orchid.test/account/statements/{id} (second occurrence: /account/statements/{id}/pdf)",
+      "status": "confirmed",
+      "triage_note": "Confirmed: another test user's statement returned",
+      "jira_key": "ORC-18"
+    },
+    {
+      "finding_id": "R2-020",
+      "fingerprint": "web-2e02",
+      "app": "orchid-portal-web",
+      "analysis": "dynamic",
+      "severity": "high",
+      "title": "Missing CSRF protection on email change",
+      "location": "https://portal.orchid.test/account/settings/email",
+      "status": "open",
+      "triage_note": "",
+      "jira_key": null
+    },
+    {
+      "finding_id": "R2-021",
+      "fingerprint": "web-2e03",
+      "app": "orchid-portal-web",
+      "analysis": "dynamic",
+      "severity": "medium",
+      "title": "Stack trace in error response",
+      "location": "https://portal.orchid.test/account/api/export",
+      "status": "false_positive",
+      "triage_note": "Response is a generic error page; trace text is a static help snippet",
+      "jira_key": null
+    },
+    {
+      "finding_id": "R2-022",
+      "fingerprint": "web-2e04",
+      "app": "orchid-portal-web",
+      "analysis": "dynamic",
+      "severity": "low",
+      "title": "Password field allows autocomplete",
+      "location": "https://portal.orchid.test/account/settings/password",
+      "status": "risk_accepted",
+      "triage_note": "Browser password managers encouraged by policy",
+      "jira_key": null
+    }
+  ]
+}

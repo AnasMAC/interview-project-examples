@@ -1,0 +1,30 @@
+{% extends "admin/base.html" %}
+{% block title %}Activity{% endblock %}
+{% block content %}
+<h1>Activity <span class="tz">times shown in UTC</span></h1>
+<form method="get" action="/admin/activity">
+  <label for="action">Action</label>
+  <select id="action" name="action">
+    <option value="">any</option>
+    {% for value in actions|default([]) %}
+    <option value="{{ value }}"{% if value == selected_action|default('') %} selected{% endif %}>{{ value }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit">Filter</button>
+</form>
+<table>
+  <thead><tr><th>When (UTC)</th><th>Actor</th><th>Action</th><th>Target</th><th>Detail</th></tr></thead>
+  <tbody>
+    {% for event in events|default([]) %}
+    <tr>
+      <td>{{ event.created_at }}</td>
+      <td>{{ event.actor.name|default('system') }}</td>
+      <td>{{ event.action }}</td>
+      <td>{{ event.target_type|default('') }}
+        {% if event.target_id is not none %}#{{ event.target_id }}{% endif %}</td>
+      <td>{{ event.detail }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

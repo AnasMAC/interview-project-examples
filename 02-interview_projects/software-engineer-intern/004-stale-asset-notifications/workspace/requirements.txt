@@ -1,0 +1,12 @@
+# Runtime dependencies. Everything is pinned, transitive packages included, so
+# every laptop and CI builds the same image. Bump on purpose and say so in
+# CHANGELOG.md.
+Django==5.1.4
+asgiref==3.8.1
+sqlparse==0.5.3
+djangorestframework==3.15.2
+psycopg[binary]==3.2.3
+psycopg-binary==3.2.3
+typing_extensions==4.12.2
+# IDNA 2008 / UTS 46 for hostname normalization (atlas/core/normalize.py)
+idna==3.10

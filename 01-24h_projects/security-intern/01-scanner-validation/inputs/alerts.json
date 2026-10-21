@@ -1,0 +1,6 @@
+[
+  {"finding_id":"F-01","title":"Cross-tenant report read","route":"/reports","claim":"A signed-in red user can retrieve blue reports by changing report_id","scanner_severity":"high"},
+  {"finding_id":"F-02","title":"Reflected script injection","route":"/preview","claim":"Query text is embedded into HTML without escaping","scanner_severity":"high"},
+  {"finding_id":"F-03","title":"Unauthenticated report read","route":"/reports","claim":"Report IDs alone disclose report content","scanner_severity":"high"},
+  {"finding_id":"F-04","title":"Missing content security policy","route":"/preview","claim":"No Content-Security-Policy header is returned","scanner_severity":"medium"}
+]

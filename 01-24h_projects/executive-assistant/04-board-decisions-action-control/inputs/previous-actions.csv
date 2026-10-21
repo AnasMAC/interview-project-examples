@@ -1,0 +1,7 @@
+action_id,action,owner,due,status,last_evidence
+X01,Verify CSV audit export,Tess,2027-03-19T17:00:00+01:00,open,Awaiting result
+X02,Execute supplier DPA,Iman,2027-03-19T17:00:00+01:00,open,Awaiting signatures
+X03,Refresh pricing deck,Omar,2027-03-22T17:00:00+01:00,open,No completion evidence
+X04,Prepare security control report,Tess,2027-03-24T12:00:00+01:00,blocked,Needs normalized Ops inputs
+X05,Archive offsite decisions,Hana,2027-03-20T17:00:00+01:00,closed,Archive receipt AR-05 dated 2027-03-20
+X06,Prepare spending schedule,Ren,2027-03-22T17:00:00+01:00,open,Awaiting board release terms

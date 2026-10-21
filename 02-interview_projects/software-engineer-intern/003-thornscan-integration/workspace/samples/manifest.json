@@ -1,0 +1,165 @@
+{
+  "description": "Demo ingest for `make demo`: sample scanner outputs of checkout-api and route-planner in the order CI produced them (2026-08-24 to 2026-09-21). `file` is relative to this directory; the format is detected from the content.",
+  "runs": [
+    {
+      "file": "brackish/checkout-api/brackish-2026-08-24-6ffbc65.sarif",
+      "repo": "checkout-api",
+      "branch": "main",
+      "commit": "6ffbc65cdbb1a9074894068dcafc7cd6e6ae854a",
+      "tool": "brackish",
+      "note": "first run: 6 findings (tests/fixtures/ secret suppressed by the baseline; session.py is Identity's)"
+    },
+    {
+      "file": "thistle/checkout-api/thistle-2026-08-24-6ffbc65.sarif",
+      "repo": "checkout-api",
+      "branch": "main",
+      "commit": "6ffbc65cdbb1a9074894068dcafc7cd6e6ae854a",
+      "tool": "thistle",
+      "note": "absolute workspace URIs, 0-based columns; sqli/ssrf/xss merge into the Brackish findings, settings.py:27 does not (CWE-321 vs CWE-798)"
+    },
+    {
+      "file": "kitewatch/checkout-api/kitewatch-2026-08-24-6ffbc65.json",
+      "repo": "checkout-api",
+      "branch": "main",
+      "commit": "6ffbc65cdbb1a9074894068dcafc7cd6e6ae854a",
+      "tool": "kitewatch",
+      "note": "Kitewatch 2.9 (v2, numeric risk): 5 alerts, 7 instances"
+    },
+    {
+      "file": "depwarden/checkout-api/depwarden-2026-08-24-6ffbc65.xml",
+      "repo": "checkout-api",
+      "branch": "main",
+      "commit": "6ffbc65cdbb1a9074894068dcafc7cd6e6ae854a",
+      "tool": "depwarden",
+      "note": "Depwarden 4 (default namespace): 4 advisories in 3 packages"
+    },
+    {
+      "file": "pentest/checkout-api/harrowgate-2026-07-checkout-api.csv",
+      "repo": "checkout-api",
+      "branch": "main",
+      "commit": "6ffbc65cdbb1a9074894068dcafc7cd6e6ae854a",
+      "tool": "pentest",
+      "note": "Harrowgate Security report, July 2026: UTF-8 BOM, ';' delimiter, multi-line cells; HG-CHK-05 closed"
+    },
+    {
+      "file": "brackish/route-planner/brackish-2026-08-26-e0ddfdc.sarif",
+      "repo": "route-planner",
+      "branch": "main",
+      "commit": "e0ddfdce3d53001992c755fc783a7614a808914c",
+      "tool": "brackish",
+      "note": "4 findings; constraints.py:40 is suppressed in source and skipped"
+    },
+    {
+      "file": "thistle/route-planner/thistle-2026-08-26-e0ddfdc.sarif",
+      "repo": "route-planner",
+      "branch": "main",
+      "commit": "e0ddfdce3d53001992c755fc783a7614a808914c",
+      "tool": "thistle",
+      "note": "Windows runner: WORKSPACE base file:///C:/builds/routing/route-planner/; cache.py:52 and export.py:71 merge into the Brackish findings"
+    },
+    {
+      "file": "depwarden/route-planner/depwarden-2026-08-26-e0ddfdc.xml",
+      "repo": "route-planner",
+      "branch": "main",
+      "commit": "e0ddfdce3d53001992c755fc783a7614a808914c",
+      "tool": "depwarden",
+      "note": "Depwarden 3 (dw: prefix), no lock file: versions are requested ranges"
+    },
+    {
+      "file": "brackish/checkout-api/brackish-2026-09-02-c9aa3b0.sarif",
+      "repo": "checkout-api",
+      "branch": "main",
+      "commit": "c9aa3b0456af35f0cab251f9795c9ea70c024c68",
+      "tool": "brackish",
+      "note": "MD5 session token fixed (session.py:11 gone); new path traversal in orders.py:88"
+    },
+    {
+      "file": "depwarden/checkout-api/depwarden-2026-09-02-c9aa3b0.xml",
+      "repo": "checkout-api",
+      "branch": "main",
+      "commit": "c9aa3b0456af35f0cab251f9795c9ea70c024c68",
+      "tool": "depwarden",
+      "note": "fastjwt upgraded to 1.9.2 (fixed); new pillowcase advisory"
+    },
+    {
+      "file": "brackish/checkout-api/brackish-2026-09-07-771a3dc-feature-refund-limits.sarif",
+      "repo": "checkout-api",
+      "branch": "feature/refund-limits",
+      "commit": "771a3dc5877a179ea9a2b23b56b3649c987de310",
+      "tool": "brackish",
+      "note": "feature branch: its own lifecycle; refund_limits.py:31 exists only here"
+    },
+    {
+      "file": "brackish/route-planner/brackish-2026-09-09-f331e8e.sarif",
+      "repo": "route-planner",
+      "branch": "main",
+      "commit": "f331e8ea64b77f13c5ff120e36aa4a3a7baf102d",
+      "tool": "brackish",
+      "note": "XXE fixed; cache.py finding moved from line 52 to 55 (code added above); new ReDoS note"
+    },
+    {
+      "file": "thistle/route-planner/thistle-2026-09-09-f331e8e.sarif",
+      "repo": "route-planner",
+      "branch": "main",
+      "commit": "f331e8ea64b77f13c5ff120e36aa4a3a7baf102d",
+      "tool": "thistle",
+      "note": "Thistle 5.0 on a Linux runner: absolute URIs, 1-based columns now"
+    },
+    {
+      "file": "kitewatch/route-planner/kitewatch-2026-09-09-f331e8e.json",
+      "repo": "route-planner",
+      "branch": "main",
+      "commit": "f331e8ea64b77f13c5ff120e36aa4a3a7baf102d",
+      "tool": "kitewatch",
+      "note": "Kitewatch 3.2 (v3, word severities); KW-HDR-007 on /debug/routes: its baseline entry expired 2026-08-31"
+    },
+    {
+      "file": "brackish/checkout-api/brackish-2026-09-14-28e5dc9.sarif",
+      "repo": "checkout-api",
+      "branch": "main",
+      "commit": "28e5dc98f2bb9209ec5ca7ffd446ad1baab7a2a5",
+      "tool": "brackish",
+      "note": "XSS fixed; MD5 back (revert of the token change: reopened); health.py:7 suppressed in source"
+    },
+    {
+      "file": "thistle/checkout-api/thistle-2026-09-14-28e5dc9.sarif",
+      "repo": "checkout-api",
+      "branch": "main",
+      "commit": "28e5dc98f2bb9209ec5ca7ffd446ad1baab7a2a5",
+      "tool": "thistle",
+      "note": "WORKSPACE base URI this time; XSS and insecure random fixed; new open redirect in orders.py:120"
+    },
+    {
+      "file": "kitewatch/checkout-api/kitewatch-2026-09-14-28e5dc9.json",
+      "repo": "checkout-api",
+      "branch": "main",
+      "commit": "28e5dc98f2bb9209ec5ca7ffd446ad1baab7a2a5",
+      "tool": "kitewatch",
+      "note": "Kitewatch 3.2 (v3 words): same rule ids as v2; XSS, HSTS and the /cart cookie fixed; new CORS finding"
+    },
+    {
+      "file": "pentest/checkout-api/harrowgate-2026-09-retest-checkout-api.csv",
+      "repo": "checkout-api",
+      "branch": "main",
+      "commit": "28e5dc98f2bb9209ec5ca7ffd446ad1baab7a2a5",
+      "tool": "pentest",
+      "note": "Harrowgate retest: Windows-1252, ',' delimiter; HG-CHK-02 retest passed (fixed); new HG-CHK-06"
+    },
+    {
+      "file": "brackish/route-planner/brackish-2026-09-21-35f17a0.sarif",
+      "repo": "route-planner",
+      "branch": "main",
+      "commit": "35f17a0c73521b775fac3ae8e42f92b81f33eee4",
+      "tool": "brackish",
+      "note": "XXE back (entity resolution re-enabled for a customer's GPX files: reopened); token moved to env (fixed)"
+    },
+    {
+      "file": "depwarden/route-planner/depwarden-2026-09-21-35f17a0.xml",
+      "repo": "route-planner",
+      "branch": "main",
+      "commit": "35f17a0c73521b775fac3ae8e42f92b81f33eee4",
+      "tool": "depwarden",
+      "note": "Depwarden 4 with poetry.lock: resolved versions replace the ranges; same three advisories (the fingerprint ignores the version)"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+; orchid-grid.example.test (master, ns1.orchid-grid.example.test)
+$ORIGIN orchid-grid.example.test.
+$TTL 7200
+@               IN SOA ns1 hostmaster (2026110201 3600 600 604800 600)
+                IN NS  ns1
+                IN NS  ns2.dnsbackup.example.test.
+                IN MX  10 mail
+                IN A   203.0.113.70
+                IN AAAA 2001:db8:6f1::70
+ns1             IN A   203.0.113.66
+mail            IN A   203.0.113.68
+portal          IN A   203.0.113.70
+                IN AAAA 2001:db8:6f1::70
+; field gateway for the substation telemetry network (vendor: Gridline)
+gw              IN A   203.0.113.77
+                IN AAAA 2001:db8:6f1::77
+telemetry       IN CNAME gw
+outage-map      IN CNAME portal

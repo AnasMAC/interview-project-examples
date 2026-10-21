@@ -1,0 +1,42 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Exposures{% endblock %}
+{% block content %}
+<h1>Open exposures <span class="count">{{ total }}</span></h1>
+<div class="overview">
+  <figure class="chart">
+    <svg role="img" aria-labelledby="sev-chart-title" viewBox="0 0 {{ chart.width }} {{ chart.height }}" width="{{ chart.width }}" height="{{ chart.height }}">
+      <title id="sev-chart-title">Open exposures by severity</title>
+      {% for bar in chart.bars %}
+      <text x="0" y="{{ bar.text_y }}">{{ bar.label }}</text>
+      <rect class="sev-bar sev-{{ bar.label }}" x="{{ chart.label_width }}" y="{{ bar.y }}" width="{{ bar.width }}" height="{{ chart.bar_height }}"></rect>
+      <text x="{{ bar.value_x }}" y="{{ bar.text_y }}">{{ bar.value }}</text>
+      {% endfor %}
+    </svg>
+    <figcaption>Open exposures by severity</figcaption>
+  </figure>
+  <table class="compact">
+    <caption>By rule</caption>
+    <thead><tr><th scope="col">Rule</th><th scope="col">Open</th></tr></thead>
+    <tbody>
+    {% for row in by_rule %}
+      <tr><td><a href="{% url 'dashboard:asset-list' %}?exposure={{ row.rule|urlencode }}">{{ row.rule }}</a></td><td class="num">{{ row.n }}</td></tr>
+    {% empty %}<tr><td colspan="2" class="muted">Nothing open.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<h2>Most recently opened</h2>
+<table>
+  <thead><tr><th scope="col">Severity</th><th scope="col">Title</th><th scope="col">Asset</th><th scope="col">Opened</th></tr></thead>
+  <tbody>
+  {% for exposure in recent %}
+    <tr><td><span class="sev sev-{{ exposure.severity }}">{{ exposure.get_severity_display }}</span></td>
+      <td>{{ exposure.title }}</td>
+      <td><a href="{% url 'dashboard:asset-detail' exposure.asset_id %}">{{ exposure.asset.label|default:exposure.asset.key }}</a></td>
+      <td>{{ exposure.opened_at|date:"Y-m-d H:i" }}</td></tr>
+  {% empty %}<tr><td colspan="4" class="muted">No open exposures.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

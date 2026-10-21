@@ -1,0 +1,5 @@
+candidate_id,name,email,available_start,available_end,private_need
+A,Aisha,aisha@example.test,2027-03-29T11:00:00+04:00,2027-03-29T14:00:00+04:00,None
+B,Ben,ben@example.test,2027-03-29T08:00:00+00:00,2027-03-29T12:00:00+00:00,None
+C,Casey,casey@example.test,2027-03-30T08:00:00-04:00,2027-03-30T11:00:00-04:00,Recording off
+D,Dev,dev@example.test,2027-03-30T13:00:00+01:00,2027-03-30T16:00:00+01:00,Live captions

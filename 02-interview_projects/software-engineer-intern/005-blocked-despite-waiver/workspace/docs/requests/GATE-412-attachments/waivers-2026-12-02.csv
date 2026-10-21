@@ -1,0 +1,24 @@
+id,team,service,rule,version_range,status,requested_by,reviewed_by,reviewed_at,review_note,created_at,expires_at,expiry_notice_sent_at
+1,data-pipelines,warehouse-sync,dependency.max_severity,,expired,key:data-pipelines-ci,key:grace.adeyemi,2026-09-13T14:00:00.000+00:00,ok until the driver upgrade lands,2026-09-13T11:00:00.000+00:00,2026-11-22T11:00:00.000+00:00,2026-11-20T08:00:12.000+00:00
+2,risk-scoring,risk-models,tests.min_pass_rate,,approved,key:risk-scoring-ci,key:security-review,2026-09-23T15:00:00.000+00:00,keep the rewrite ticket linked,2026-09-23T11:00:00.000+00:00,2026-12-20T11:00:00.000+00:00,
+3,payments-api,refunds-worker,sast.new_high_max,,expired,key:payments-api-ci,key:grace.adeyemi,2026-10-03T16:00:00.000+00:00,one sprint only,2026-10-03T11:00:00.000+00:00,2026-11-02T11:00:00.000+00:00,2026-10-31T09:00:12.000+00:00
+4,settlement-sg,sgd-clearing,sast.new_high_max,,expired,key:settlement-sg-ci,key:security-review,2026-10-13T17:00:00.000+00:00,re-check after,2026-10-13T11:00:00.000+00:00,2026-11-20T11:00:00.000+00:00,2026-11-18T01:00:12.000+00:00
+5,payments-api,payments-api,tests.min_pass_rate,,expired,key:payments-api-ci,key:grace.adeyemi,2026-10-18T13:00:00.000+00:00,until the sandbox is fixed,2026-10-18T11:00:00.000+00:00,2026-11-07T11:00:00.000+00:00,2026-11-05T09:00:12.000+00:00
+6,ledger-core,journal-writer,dependency.max_severity,>=3.0.0,revoked,key:ledger-core-ci,key:security-review,2026-10-23T14:00:00.000+00:00,,2026-10-23T11:00:00.000+00:00,2026-12-12T11:00:00.000+00:00,
+7,fx-rates,rates-ingest,secrets.allowed,,expired,key:fx-rates-ci,,,,2026-10-28T11:00:00.000+00:00,2026-11-12T11:00:00.000+00:00,
+8,card-issuing,card-tokenizer,dependency.max_severity,,approved,key:card-issuing-ci,key:security-review,2026-11-02T16:00:00.000+00:00,approved,2026-11-02T11:00:00.000+00:00,2026-12-04T18:00:00.000+00:00,2026-12-02T09:00:12.000+00:00
+9,payments-api,payments-webhooks,secrets.allowed,,rejected,key:payments-api-ci,key:grace.adeyemi,2026-11-07T14:00:00.000+00:00,rotate the key instead; a waiver does not make a leaked secret safe,2026-11-07T11:00:00.000+00:00,2026-12-07T11:00:00.000+00:00,
+10,merchant-portal,merchant-web,dependency.max_severity,,revoked,key:merchant-portal-ci,key:security-review,2026-11-12T13:00:00.000+00:00,,2026-11-12T11:00:00.000+00:00,2026-12-22T11:00:00.000+00:00,
+11,settlement-sg,settlement-engine,dependency.max_severity,,approved,key:settlement-sg-ci,key:grace.adeyemi,2026-11-12T14:00:00.000+00:00,until the freeze ends,2026-11-12T11:00:00.000+00:00,2026-12-04T03:00:00.000+00:00,2026-12-02T01:00:12.000+00:00
+12,risk-scoring,fraud-rules,dependency.max_severity,<2.0.0,rejected,key:risk-scoring-ci,key:security-review,2026-11-17T14:00:00.000+00:00,"reachability is not shown; upgrade, it is a patch release",2026-11-17T11:00:00.000+00:00,2026-12-17T11:00:00.000+00:00,
+13,mobile-backend,push-notifier,sast.new_high_max,,approved,key:mobile-backend-ci,key:grace.adeyemi,2026-11-18T16:00:00.000+00:00,approved,2026-11-18T11:00:00.000+00:00,2026-12-18T11:00:00.000+00:00,
+14,kyc-platform,kyc-api,dependency.max_severity,">=2.5.0,<2.6.0",approved,key:kyc-platform-ci,key:security-review,2026-11-20T17:00:00.000+00:00,2.5 line only,2026-11-20T11:00:00.000+00:00,2027-01-01T11:00:00.000+00:00,
+15,ledger-core,,tests.min_pass_rate,,approved,key:ledger-core-ci,key:grace.adeyemi,2026-11-22T13:00:00.000+00:00,approved,2026-11-22T11:00:00.000+00:00,2026-12-22T11:00:00.000+00:00,
+16,payments-api,payments-api,dependency.max_severity,">=4.12.0,<4.13.0",approved,key:payments-api-ci,key:security-review,2026-11-23T14:00:00.000+00:00,approved for the 4.12 line only,2026-11-23T11:00:00.000+00:00,2026-12-14T11:00:00.000+00:00,
+17,platform-infra,build-images,dependency.max_severity,,approved,key:platform-infra-ci,key:grace.adeyemi,2026-11-24T15:00:00.000+00:00,approved,2026-11-24T11:00:00.000+00:00,2026-12-24T11:00:00.000+00:00,
+18,merchant-portal,statements-export,signing.required,,approved,key:merchant-portal-ci,key:security-review,2026-11-26T16:00:00.000+00:00,short waiver,2026-11-26T11:00:00.000+00:00,2026-12-04T23:00:00.000+00:00,
+19,kyc-platform,document-check,sast.new_high_max,,approved,key:kyc-platform-ci,key:grace.adeyemi,2026-11-27T17:00:00.000+00:00,approved,2026-11-27T11:00:00.000+00:00,2026-12-03T23:00:00.000+00:00,2026-12-01T09:00:12.000+00:00
+20,settlement-sg,payout-scheduler,tests.min_pass_rate,,approved,key:settlement-sg-ci,key:security-review,2026-11-29T13:00:00.000+00:00,approved,2026-11-29T11:00:00.000+00:00,2026-12-08T11:00:00.000+00:00,
+21,data-pipelines,event-loader,tests.min_pass_rate,,pending,key:data-pipelines-ci,,,,2026-11-30T11:00:00.000+00:00,2026-12-12T11:00:00.000+00:00,
+22,card-issuing,pin-service,signing.required,,pending,key:card-issuing-ci,,,,2026-12-01T06:12:00.000+00:00,2026-12-16T11:00:00.000+00:00,
+23,treasury-tools,,tests.min_pass_rate,,pending,key:treasury-tools-ci,,,,2026-12-01T23:00:00.000+00:00,2027-01-01T11:00:00.000+00:00,

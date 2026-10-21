@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="urn:depwarden:report:4" generated="2026-09-02T07:33:51Z">
+  <scanner name="Depwarden" version="4.3.0" database="2026-09-20"/>
+  <project name="checkout-api" ecosystem="pypi" manifest="requirements.lock"/>
+  <dependencies>
+    <dependency name="fastjwt" version="1.9.2" direct="true" scope="runtime"/>
+    <dependency name="lxml-lite" version="4.2.1" direct="false" scope="runtime">
+      <path>checkout-api &gt; invoicegen 2.0.4 &gt; lxml-lite 4.2.1</path>
+      <vulnerability id="DWA-2026-0142" severity="HIGH" cvss="7.5">
+        <cwe>CWE-611</cwe>
+        <title>iterparse resolves external entities by default</title>
+        <affected>&gt;=4.0.0,&lt;4.2.3</affected>
+        <fixed>4.2.3</fixed>
+      </vulnerability>
+    </dependency>
+    <dependency name="requestor" version="2.25.0" direct="true" scope="runtime">
+      <path>checkout-api &gt; requestor 2.25.0</path>
+      <vulnerability id="DWA-2026-0033" severity="MEDIUM" cvss="6.1">
+        <cwe>CWE-113</cwe>
+        <title>CR/LF accepted in header values</title>
+        <affected>&lt;2.26.1</affected>
+        <fixed>2.26.1</fixed>
+      </vulnerability>
+      <vulnerability id="DWA-2025-0761" severity="LOW" cvss="3.1">
+        <cwe>CWE-200</cwe>
+        <title>Proxy credentials sent again after a cross-host redirect</title>
+        <affected>&lt;2.26.0</affected>
+        <fixed>2.26.0</fixed>
+      </vulnerability>
+    </dependency>
+    <dependency name="pillowcase" version="9.1.0" direct="true" scope="runtime">
+      <path>checkout-api &gt; pillowcase 9.1.0</path>
+      <vulnerability id="DWA-2026-0201" severity="LOW" cvss="3.3">
+        <cwe>CWE-400</cwe>
+        <title>Unbounded memory use when decoding crafted TIFF files</title>
+        <affected>&lt;9.2.0</affected>
+        <fixed>9.2.0</fixed>
+      </vulnerability>
+    </dependency>
+    <dependency name="flask-lite" version="3.0.2" direct="true" scope="runtime"/>
+    <dependency name="invoicegen" version="2.0.4" direct="true" scope="runtime"/>
+  </dependencies>
+</report>

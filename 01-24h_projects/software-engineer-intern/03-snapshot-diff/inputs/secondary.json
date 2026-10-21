@@ -1,0 +1,19 @@
+{
+  "tenant": "north",
+  "before": {
+    "findings": [
+      {
+        "tenant": "north",
+        "asset_id": "api",
+        "rule_id": "auth",
+        "location": "/login",
+        "severity": "high",
+        "evidence": "old"
+      }
+    ]
+  },
+  "after": {
+    "coverage": [],
+    "findings": []
+  }
+}

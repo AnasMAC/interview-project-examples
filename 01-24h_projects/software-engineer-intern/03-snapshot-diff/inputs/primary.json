@@ -1,0 +1,93 @@
+{
+  "tenant": "north",
+  "before": {
+    "findings": [
+      {
+        "tenant": "north",
+        "asset_id": "api",
+        "rule_id": "auth",
+        "location": "/login",
+        "severity": "high",
+        "evidence": "old auth"
+      },
+      {
+        "tenant": "north",
+        "asset_id": "api",
+        "rule_id": "tls",
+        "location": "/",
+        "severity": "medium",
+        "evidence": "old tls"
+      },
+      {
+        "tenant": "north",
+        "asset_id": "portal",
+        "rule_id": "debug",
+        "location": "/debug",
+        "severity": "low",
+        "evidence": "old debug"
+      },
+      {
+        "tenant": "north",
+        "asset_id": "portal",
+        "rule_id": "leak",
+        "location": "/export",
+        "severity": "high",
+        "evidence": "old leak"
+      },
+      {
+        "tenant": "south",
+        "asset_id": "api",
+        "rule_id": "private",
+        "location": "/secret",
+        "severity": "critical",
+        "evidence": "foreign"
+      }
+    ]
+  },
+  "after": {
+    "coverage": [
+      {
+        "asset_id": "api",
+        "status": "complete"
+      },
+      {
+        "asset_id": "portal",
+        "status": "partial"
+      }
+    ],
+    "findings": [
+      {
+        "tenant": "north",
+        "asset_id": "api",
+        "rule_id": "auth",
+        "location": "/login",
+        "severity": "critical",
+        "evidence": "new auth"
+      },
+      {
+        "tenant": "north",
+        "asset_id": "api",
+        "rule_id": "headers",
+        "location": "/",
+        "severity": "low",
+        "evidence": "new headers"
+      },
+      {
+        "tenant": "north",
+        "asset_id": "portal",
+        "rule_id": "leak",
+        "location": "/export",
+        "severity": "high",
+        "evidence": "fresh leak"
+      },
+      {
+        "tenant": "south",
+        "asset_id": "api",
+        "rule_id": "private",
+        "location": "/secret",
+        "severity": "critical",
+        "evidence": "foreign new"
+      }
+    ]
+  }
+}

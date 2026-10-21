@@ -1,0 +1,55 @@
+{
+  "scanner": {"name": "periscope", "version": "4.2.1"},
+  "scan": {
+    "id": "psc-og-20261104-2200", "profile": "external-daily",
+    "started_at": "2026-11-04T09:00:00Z", "finished_at": "2026-11-04T09:12:18Z"
+  },
+  "hosts": [
+    {
+      "address": "203.0.113.70", "state": "up",
+      "hostnames": [{"name": "portal.orchid-grid.example.test", "source": "target"}],
+      "ports": [
+        {"port": 443, "protocol": "tcp", "state": "open",
+         "service": {"name": "http", "tunnel": "ssl", "product": "Caddy", "version": "2.8.4"}},
+        {"port": 80, "protocol": "tcp", "state": "open",
+         "service": {"name": "http", "product": "Caddy", "banner": "HTTP/1.1 308 Permanent Redirect"}}
+      ]
+    },
+    {
+      "address": "203.0.113.77", "state": "up",
+      "hostnames": [
+        {"name": "gw.orchid-grid.example.test", "source": "target"},
+        {"name": "static-77.akl.transitnet.example.test", "source": "ptr"}
+      ],
+      "ports": [
+        {"port": 22, "protocol": "tcp", "state": "open",
+         "service": {"name": "ssh", "product": "OpenSSH", "version": "8.4p1", "banner": "SSH-2.0-OpenSSH_8.4p1 Debian-5+deb11u3"}},
+        {"port": 8443, "protocol": "tcp", "state": "open",
+         "service": {"name": "http", "tunnel": "ssl", "product": "Gridline admin console", "version": "3.7",
+                     "banner": "HTTP/1.1 200 OK\r\nServer: Gridline-GW\r\n\r\n<title>Gridline Substation Gateway - Admin Login</title>"}},
+        {"port": 161, "protocol": "udp", "state": "open",
+         "service": {"name": "snmp", "banner": "SNMPv2c public"}},
+        {"port": 123, "protocol": "udp", "state": "open|filtered"}
+      ]
+    },
+    {
+      "address": "2001:db8:6f1::77", "state": "up",
+      "hostnames": [{"name": "gw.orchid-grid.example.test", "source": "target"}],
+      "ports": [
+        {"port": 8443, "protocol": "tcp", "state": "open",
+         "service": {"name": "http", "tunnel": "ssl", "product": "Gridline admin console", "version": "3.7"}}
+      ]
+    },
+    {
+      "address": "203.0.113.68", "state": "up",
+      "hostnames": [{"name": "mail.orchid-grid.example.test", "source": "target"}],
+      "ports": [
+        {"port": 443, "protocol": "tcp", "state": "open", "service": {"tunnel": "ssl"}},
+        {"port": 25, "protocol": "tcp", "state": "filtered"}
+      ]
+    },
+    {
+      "address": "203.0.113.79", "state": "down", "hostnames": [], "ports": []
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "exports/red/q1.csv": "red forecast,120",
+  "exports/red/quarter 1.csv": "red encoded-name forecast,125",
+  "exports/blue/q2.csv": "blue forecast,340",
+  "exports/red-old/staging.txt": "red-old staging token: DEMO_NONFUNCTIONAL",
+  "private/operator.txt": "operator notes: fictional restricted data"
+}

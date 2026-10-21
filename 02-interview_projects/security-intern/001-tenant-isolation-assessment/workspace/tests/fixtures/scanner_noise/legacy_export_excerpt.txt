@@ -1,0 +1,24 @@
+2023 helpdesk export excerpt (first 60 lines of 4,182)
+exported by hdp-admin 2023-09-12, format helpdesk-2019/csv, delimiter ;, quoted
+
+ticket_id;subject;customer_email;agent;updated
+1041;Printer jam in the Bristol office;ops@harborline.example.test;r.duarte;2023-01-04T11:02:00Z
+1042;Invoice 2023-0142 missing;accounts@harborline.example.test;r.duarte;2023-01-05T09:41:00Z
+1043;Re: Invoice 2023-0142 missing;accounts@harborline.example.test;r.duarte;2023-01-05T15:18:00Z
+1044;Password reset for the shared mailbox;it@harborline.example.test;j.weber;2023-01-09T08:00:00Z
+
+attachments inline as base64 (first 48 bytes of each):
+QlVORExFX0JMT0JfREVNT19D
+QlVORExFX0JMT0JfREVNT19D
+
+operator notes (do not paste into tickets):
+  * old smtp password was DEMO-helpdesk-smtp-password
+  * shared mailbox used DEMO-mailbox-2019
+  * the 2023 export still contains two rows for ticket HDP-2019-114; the importer
+    script skips them by subject match, see tools/csv-import/import_legacy.py
+
+--- base64 section, unchanged from the original export ---
+QlVORExFX0JMT0JfREVNT19D
+VGhpcyBpcyBhIGRlbW8gZXhwb3J0IGZvciB0aGUgQmVsbHBvc3Qgd29ybGQ7IG5vdGhpbmcgaGVyZSBpcwpp
+biB1c2UuIEl0IGxvb2tzIGxpa2UgYSByZWFsIGNyZWRlbnRpYWwgZHVtcCB0byBhIHNjYW5uZXIsIHdoaWNoIGlz
+ZXhhY3RseSB3aHkgaXQgbGl2ZXMgaW4gdGhpcyBkaXJlY3RvcnkuCg==

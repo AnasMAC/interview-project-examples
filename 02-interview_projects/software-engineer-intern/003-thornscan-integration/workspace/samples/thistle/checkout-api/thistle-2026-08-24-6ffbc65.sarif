@@ -1,0 +1,206 @@
+{
+  "$schema": "https://docs.oasis-open.org/sarif/sarif/v2.1.0/errata01/os/schemas/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Thistle",
+          "version": "4.8.2",
+          "organization": "Thistle Static Analysis",
+          "rules": [
+            {
+              "id": "TH-INJ-SQL",
+              "shortDescription": {
+                "text": "Tainted data reaches a SQL string"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "cwe": "CWE-89",
+                "category": "security"
+              }
+            },
+            {
+              "id": "TH-NET-SSRF",
+              "shortDescription": {
+                "text": "Server-side request to a tainted URL"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "cwe": "CWE-918",
+                "category": "security"
+              }
+            },
+            {
+              "id": "TH-XSS-TEMPLATE",
+              "shortDescription": {
+                "text": "Unescaped template variable"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "cwe": "CWE-79",
+                "category": "security"
+              }
+            },
+            {
+              "id": "TH-CRYPTO-KEY",
+              "shortDescription": {
+                "text": "Cryptographic key or API secret in source"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "cwe": "CWE-321",
+                "category": "security"
+              }
+            },
+            {
+              "id": "TH-RAND-INSECURE",
+              "shortDescription": {
+                "text": "Non-cryptographic random used for a token"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "cwe": "CWE-338",
+                "category": "security"
+              }
+            }
+          ]
+        }
+      },
+      "columnKind": "utf16CodeUnits",
+      "versionControlProvenance": [
+        {
+          "repositoryUri": "https://git.fernwick.example.test/payments/checkout-api",
+          "revisionId": "6ffbc65cdbb1a9074894068dcafc7cd6e6ae854a"
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "TH-INJ-SQL",
+          "level": "error",
+          "message": {
+            "text": "request.args['order_id'] flows into a SQL string"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///builds/payments/checkout-api/src/payments/refunds.py"
+                },
+                "region": {
+                  "startLine": 42,
+                  "startColumn": 8
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "thistle/v1": "5aaa8a0bf9038d99f134515f776574a9"
+          }
+        },
+        {
+          "ruleId": "TH-NET-SSRF",
+          "level": "error",
+          "message": {
+            "text": "merchant.callback_url flows into urlopen()"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///builds/payments/checkout-api/src/payments/webhooks.py"
+                },
+                "region": {
+                  "startLine": 63,
+                  "startColumn": 15
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "thistle/v1": "5e78749f420b29f3068fbd9641cce208"
+          }
+        },
+        {
+          "ruleId": "TH-XSS-TEMPLATE",
+          "level": "warning",
+          "message": {
+            "text": "customer_note rendered with |safe"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///builds/payments/checkout-api/src/checkout/templates/receipt.html"
+                },
+                "region": {
+                  "startLine": 18,
+                  "startColumn": 4
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "thistle/v1": "30ec705c48ad4a5565581fc055cd2183"
+          }
+        },
+        {
+          "ruleId": "TH-CRYPTO-KEY",
+          "level": "error",
+          "message": {
+            "text": "PSP_API_KEY looks like a live secret"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///builds/payments/checkout-api/src/checkout/settings.py"
+                },
+                "region": {
+                  "startLine": 27,
+                  "startColumn": 0
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "thistle/v1": "7caf1cf858a64121e83ade16c0a6df2f"
+          }
+        },
+        {
+          "ruleId": "TH-RAND-INSECURE",
+          "level": "warning",
+          "message": {
+            "text": "random.choices() used for a refund token"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///builds/payments/checkout-api/src/checkout/auth/refund_tokens.py"
+                },
+                "region": {
+                  "startLine": 24,
+                  "startColumn": 11
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "thistle/v1": "48c776f99c6d26c101d4eeb521dcf19a"
+          }
+        }
+      ]
+    }
+  ]
+}

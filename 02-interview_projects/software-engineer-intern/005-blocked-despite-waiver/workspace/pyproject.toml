@@ -1,0 +1,33 @@
+[project]
+name = "mossbank-gatekeeper"
+version = "3.6.1"
+description = "Release gate for Mossbank CI pipelines: evidence in, pass/warn/block out."
+requires-python = ">=3.12,<3.13"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# The source is bind-mounted into containers: no cache files on the host.
+addopts = "-ra -q -p no:cacheprovider --strict-markers"
+markers = [
+    "committed: needs data committed for real across connections (committed_engine fixture)",
+]
+filterwarnings = [
+    "error::sqlalchemy.exc.SAWarning",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = ["var"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "S"]
+ignore = [
+    "S101",  # assert in tests
+    "S311",  # random drives the deterministic seed, not crypto
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S105", "S106", "S107"]
+"gatekeeper/seed/**" = ["S105", "S106"]
+"migrations/**" = ["E501"]

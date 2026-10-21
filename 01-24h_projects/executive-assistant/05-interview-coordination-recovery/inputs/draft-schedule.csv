@@ -1,0 +1,9 @@
+draft_id,candidate_id,stage,start,end,interviewers,note
+D01,A,screen,2027-03-29T08:30:00+01:00,2027-03-29T09:00:00+01:00,Jo,Old availability
+D02,B,screen,2027-03-29T09:00:00+01:00,2027-03-29T09:30:00+01:00,Jo,Invitation text says 09:00 UTC+00
+D03,A,panel,2027-03-29T10:30:00+01:00,2027-03-29T11:15:00+01:00,Mira;Tess,Proposed
+D04,B,panel,2027-03-29T11:15:00+01:00,2027-03-29T12:00:00+01:00,Mira;Tess,No buffer after D03
+D05,C,screen,2027-03-30T13:00:00+01:00,2027-03-30T13:30:00+01:00,Jo,Invitation text says 09:00 UTC-04
+D06,D,screen,2027-03-30T13:30:00+01:00,2027-03-30T14:00:00+01:00,Jo,No buffer after D05
+D07,C,panel,2027-03-30T14:00:00+01:00,2027-03-30T14:30:00+01:00,Mira,Missing Tess;too short
+D08,D,panel,2027-03-30T14:30:00+01:00,2027-03-30T15:15:00+01:00,Mira;Tess,No buffer after D07

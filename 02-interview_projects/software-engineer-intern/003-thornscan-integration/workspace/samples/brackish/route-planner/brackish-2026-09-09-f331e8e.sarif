@@ -1,0 +1,299 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Brackish",
+          "semanticVersion": "3.12.0",
+          "informationUri": "https://brackish.example.test/docs",
+          "rules": [
+            {
+              "id": "BRK-DESER-008",
+              "name": "unsafe-deserialization",
+              "shortDescription": {
+                "text": "pickle.loads on data from a shared cache"
+              },
+              "helpUri": "https://brackish.example.test/rules/BRK-DESER-008",
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-502"
+                ],
+                "security-severity": "8.1",
+                "precision": "high"
+              }
+            },
+            {
+              "id": "BRK-PATH-006",
+              "name": "path-from-request",
+              "shortDescription": {
+                "text": "File path built from request data"
+              },
+              "helpUri": "https://brackish.example.test/rules/BRK-PATH-006",
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-22"
+                ],
+                "security-severity": "7.5",
+                "precision": "high"
+              }
+            },
+            {
+              "id": "BRK-SECRET-004",
+              "name": "hardcoded-credential",
+              "shortDescription": {
+                "text": "Hard-coded credential"
+              },
+              "helpUri": "https://brackish.example.test/rules/BRK-SECRET-004",
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-798"
+                ],
+                "security-severity": "7.5",
+                "precision": "high"
+              },
+              "messageStrings": {
+                "default": {
+                  "text": "Hard-coded credential assigned to {0}"
+                },
+                "test": {
+                  "text": "Hard-coded credential {0} in test code"
+                }
+              }
+            },
+            {
+              "id": "BRK-ASSERT-009",
+              "name": "assert-for-authorization",
+              "shortDescription": {
+                "text": "assert used for an authorization check"
+              },
+              "helpUri": "https://brackish.example.test/rules/BRK-ASSERT-009",
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-617"
+                ],
+                "security-severity": "4.3",
+                "precision": "high"
+              }
+            },
+            {
+              "id": "BRK-REDOS-011",
+              "name": "regex-backtracking",
+              "shortDescription": {
+                "text": "Regular expression with catastrophic backtracking"
+              },
+              "helpUri": "https://brackish.example.test/rules/BRK-REDOS-011",
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "external/cwe/cwe-1333"
+                ],
+                "security-severity": "3.7",
+                "precision": "high"
+              }
+            }
+          ]
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true,
+          "startTimeUtc": "2026-09-09T08:47:30Z",
+          "workingDirectory": {
+            "uri": "file:///builds/routing/route-planner/"
+          }
+        }
+      ],
+      "versionControlProvenance": [
+        {
+          "repositoryUri": "https://git.fernwick.example.test/routing/route-planner",
+          "revisionId": "f331e8ea64b77f13c5ff120e36aa4a3a7baf102d",
+          "branch": "main"
+        }
+      ],
+      "originalUriBaseIds": {
+        "%SRCROOT%": {
+          "description": {
+            "text": "Repository checkout root"
+          }
+        }
+      },
+      "results": [
+        {
+          "ruleId": "BRK-DESER-008",
+          "ruleIndex": 0,
+          "message": {
+            "text": "values read from the shared Redis cache are unpickled"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "planner/cache.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 55,
+                  "startColumn": 16,
+                  "endLine": 55,
+                  "endColumn": 41,
+                  "snippet": {
+                    "text": "return pickle.loads(blob)"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "ed2c7674e8c70562:1"
+          }
+        },
+        {
+          "ruleId": "BRK-PATH-006",
+          "ruleIndex": 1,
+          "message": {
+            "text": "request.query['file'] is joined to EXPORT_ROOT without normalisation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "planner/admin/export.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 71,
+                  "startColumn": 17,
+                  "endLine": 71,
+                  "endColumn": 70,
+                  "snippet": {
+                    "text": "with open(EXPORT_ROOT / request.query['file']) as fh:"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "325e64143e46067c:1"
+          }
+        },
+        {
+          "ruleId": "BRK-SECRET-004",
+          "ruleIndex": 2,
+          "message": {
+            "id": "default",
+            "arguments": [
+              "MAPTILES_TOKEN"
+            ]
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "planner/config.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 1,
+                  "endLine": 9,
+                  "endColumn": 42,
+                  "snippet": {
+                    "text": "MAPTILES_TOKEN = \"DEMO-maptiles-3f9a1c7e\""
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "864b5b9f02330785:1"
+          }
+        },
+        {
+          "ruleId": "BRK-ASSERT-009",
+          "ruleIndex": 3,
+          "message": {
+            "text": "assert guards the manual override"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "planner/solver/constraints.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 40,
+                  "startColumn": 9,
+                  "endLine": 40,
+                  "endColumn": 54,
+                  "snippet": {
+                    "text": "assert user.is_dispatcher, 'dispatchers only'"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "67aa320a2c0d6469:1"
+          },
+          "suppressions": [
+            {
+              "kind": "inSource",
+              "justification": "brackish: ignore[BRK-ASSERT-009]"
+            }
+          ]
+        },
+        {
+          "ruleId": "BRK-REDOS-011",
+          "ruleIndex": 4,
+          "message": {
+            "text": "nested quantifiers in COORD"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "planner/constraints/vehicles/loader.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 19,
+                  "startColumn": 14,
+                  "endLine": 19,
+                  "endColumn": 68,
+                  "snippet": {
+                    "text": "COORD = re.compile(r'^(\\d+(\\.\\d+)*)+,(\\d+(\\.\\d+)*)+$')"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "719594c60aca2e91:1"
+          }
+        }
+      ]
+    }
+  ]
+}

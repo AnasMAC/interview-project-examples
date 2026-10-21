@@ -1,0 +1,26 @@
+# Project metadata and tooling configuration.
+# Dependencies are pinned in requirements.txt (runtime) and requirements-dev.txt
+# (development); the repository is run from a virtualenv, not installed as a
+# package.
+
+[project]
+name = "bellpost"
+version = "1.4.1"
+description = "Bellpost multi-tenant helpdesk platform"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = { text = "Proprietary" }
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["app", "migrations", "seed", "tests", "tools"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+pythonpath = ["."]

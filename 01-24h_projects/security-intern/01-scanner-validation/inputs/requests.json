@@ -1,0 +1,5 @@
+[
+  {"request_id":"normal-red","route":"/reports","session":"red-reader","report_id":"r-red"},
+  {"request_id":"normal-preview","route":"/preview","query":"Welcome"},
+  {"request_id":"missing-route","route":"/unknown"}
+]

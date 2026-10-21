@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="urn:depwarden:report:4" generated="2026-09-21T10:06:12Z">
+  <scanner name="Depwarden" version="4.3.0" database="2026-09-20"/>
+  <project name="route-planner" ecosystem="pypi" manifest="poetry.lock"/>
+  <dependencies>
+    <dependency name="geojsonkit" version="0.9.1" direct="true" scope="runtime">
+      <path>route-planner &gt; geojsonkit 0.9.1</path>
+      <vulnerability id="DWA-2026-0098" severity="HIGH" cvss="7.5">
+        <cwe>CWE-1333</cwe>
+        <title>Coordinate parser backtracks on long numbers</title>
+        <affected>&lt;0.9.4</affected>
+        <fixed>0.9.4</fixed>
+      </vulnerability>
+    </dependency>
+    <dependency name="yamlette" version="5.3.2" direct="true" scope="runtime">
+      <path>route-planner &gt; yamlette 5.3.2</path>
+      <vulnerability id="DWA-2025-0544" severity="CRITICAL" cvss="9.8">
+        <cwe>CWE-502</cwe>
+        <title>load() constructs arbitrary objects by default</title>
+        <affected>&lt;5.4.0</affected>
+        <fixed>5.4.0</fixed>
+      </vulnerability>
+    </dependency>
+    <dependency name="msgcache" version="2.4.1" direct="false" scope="runtime">
+      <path>route-planner &gt; tilecache 1.2.0 &gt; msgcache 2.4.1</path>
+      <vulnerability id="DWA-2026-0120" severity="MEDIUM" cvss="5.9">
+        <cwe>CWE-400</cwe>
+        <title>Unbounded frame size in the decoder</title>
+        <affected>&gt;=2.0.0,&lt;2.4.3</affected>
+        <fixed>2.4.3</fixed>
+      </vulnerability>
+    </dependency>
+    <dependency name="ortools-lite" version="9.10.4" direct="true" scope="runtime"/>
+    <dependency name="tilecache" version="1.2.0" direct="true" scope="runtime"/>
+  </dependencies>
+</report>

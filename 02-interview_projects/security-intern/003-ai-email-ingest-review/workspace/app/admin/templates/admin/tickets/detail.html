@@ -1,0 +1,48 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ ticket.number|default('Ticket') }}{% endblock %}
+{% block content %}
+<h1>{{ ticket.number|default('Ticket') }} - {{ ticket.subject|default('') }}</h1>
+<p class="meta">
+  Status {{ ticket.status|default('') }} - priority {{ ticket.priority|default('') }} -
+  customer {{ ticket.requester.name|default('-') }} - staff {{ ticket.assignee.name|default('-') }}
+</p>
+
+<section>
+  <h2>Conversation</h2>
+  {% for message in messages|default([]) %}
+  <article>
+    <header>
+      <span class="meta">{{ message.created_at }} - {{ message.direction }}</span>
+      <strong>{{ message.author.name|default(message.from_address|default('unknown sender')) }}</strong>
+    </header>
+    <pre>{{ message.body }}</pre>
+  </article>
+  {% endfor %}
+</section>
+
+<form method="post" action="/admin/tickets/{{ ticket.id }}/messages">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label for="body">Reply</label>
+  <textarea id="body" name="body" rows="4" cols="60" required></textarea>
+  <button type="submit">Send reply</button>
+</form>
+
+<form method="post" action="/admin/tickets/{{ ticket.id }}/status">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label for="target">Move to</label>
+  <select id="target" name="status">
+    {% for value in next_statuses|default([]) %}<option value="{{ value }}">{{ value }}</option>{% endfor %}
+  </select>
+  <button type="submit">Change status</button>
+</form>
+
+<form method="post" action="/admin/tickets/{{ ticket.id }}/assign">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label for="assignee_id">Assign to</label>
+  <select id="assignee_id" name="assignee_id">
+    <option value="">unassigned</option>
+    {% for staff in assignable|default([]) %}<option value="{{ staff.id }}">{{ staff.name }}</option>{% endfor %}
+  </select>
+  <button type="submit">Assign</button>
+</form>
+{% endblock %}

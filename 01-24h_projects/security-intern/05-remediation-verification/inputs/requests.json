@@ -1,0 +1,17 @@
+[
+  {
+    "request_id": "normal-red",
+    "tenant": "red",
+    "path": "exports/red/q1.csv"
+  },
+  {
+    "request_id": "normal-blue",
+    "tenant": "blue",
+    "path": "exports/blue/q2.csv"
+  },
+  {
+    "request_id": "normal-encoded-name",
+    "tenant": "red",
+    "path": "exports/red/quarter%201.csv"
+  }
+]

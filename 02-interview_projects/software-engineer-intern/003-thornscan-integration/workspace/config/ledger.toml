@@ -1,0 +1,38 @@
+# Ledger settings for local development. Every key can be overridden by a
+# LEDGER_* environment variable (see README.md, "Configuration").
+# Relative paths are resolved against the repository root.
+
+[ledger]
+timezone = "Europe/Berlin"
+# Freeze "now" for reproducible reports and demos (same as LEDGER_NOW):
+# now = 2026-09-23T14:00:00+02:00
+
+[database]
+path = "var/ledger.db"
+busy_timeout_ms = 5000
+
+[api]
+host = "127.0.0.1"
+port = 8765
+max_upload_bytes = 10485760
+
+# DEMO tokens for local use only. CI and the shared instance inject real ones
+# through LEDGER_READ_TOKEN / LEDGER_ADMIN_TOKEN, which replace these.
+[[api.tokens]]
+name = "dashboard-ro"
+role = "read"
+token = "DEMO-ldg-ro-7f3a9c21e5b84d60"
+
+[[api.tokens]]
+name = "appsec-admin"
+role = "admin"
+token = "DEMO-ldg-admin-2c8e41b7a9d05f36"
+
+[logging]
+level = "INFO"
+format = "text"   # "json" on the shared instance
+
+[paths]
+samples = "samples"
+sla_policy = "config/sla.toml"
+holidays = "config/holidays.toml"

@@ -1,0 +1,7 @@
+source_id,role,ops_team_size,observation,request,context
+A1,Operations lead,8,"We track findings in three spreadsheets and nobody knows the owner.",One place to assign responsibility,Already uploads a weekly CSV
+A2,Founder,2,"We need a tool to find vulnerabilities automatically.",Automatic scanning,Has no existing findings queue
+A3,Operations lead,16,"I worry that a demo means giving you production credentials.",Synthetic example and clear data boundary,Already has CSV findings
+A4,Security manager,42,"Our global team requires automatic ticket sync.",Ticket integration,Operations team exceeds pilot size
+A5,Operations coordinator,5,"If I give an email I do not want a newsletter by default.",Separate consent,Already maintains CSV findings
+A6,Operations lead,12,"I can spare 20 minutes but cannot start a week-long trial.",Clear demo length and next step,Already has CSV findings

@@ -1,0 +1,46 @@
+# Continuous integration: lint, migrate and test against a real Postgres.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16.4-alpine
+        env:
+          POSTGRES_USER: bellpost
+          POSTGRES_PASSWORD: bellpost
+          POSTGRES_DB: bellpost
+        ports:
+          - 55432:5432
+        options: >-
+          --health-cmd "pg_isready -U bellpost -d bellpost"
+          --health-interval 2s
+          --health-timeout 3s
+          --health-retries 30
+    env:
+      BELLPOST_ENV: test
+      BELLPOST_DATABASE_URL: postgresql+psycopg://bellpost:bellpost@127.0.0.1:55432/bellpost
+      BELLPOST_TEST_DATABASE_URL: postgresql+psycopg://bellpost:bellpost@127.0.0.1:55432/bellpost_test
+      BELLPOST_SECRET_KEY: DEMO-session-secret-not-for-production
+      BELLPOST_ATTACHMENT_ROOT: var/attachments
+      BELLPOST_SPOOL_DIR: spool/incoming
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.7"
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt -r requirements-dev.txt
+      - name: Migrate
+        run: alembic upgrade head
+      - name: Lint
+        run: ruff check --no-cache app migrations seed tests tools
+      - name: Test
+        run: pytest -q

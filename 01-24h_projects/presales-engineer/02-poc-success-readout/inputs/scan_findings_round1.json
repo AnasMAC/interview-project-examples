@@ -1,0 +1,255 @@
+{
+  "export": {
+    "tenant": "orchid-poc",
+    "round": 1,
+    "generated_at": "2026-06-07T18:00:00Z",
+    "format": "lantern-findings-json/1",
+    "note": "One row per detection. fingerprint is the stable finding identity across rows and scans."
+  },
+  "scans": [
+    {
+      "scan_id": "S-1101",
+      "app": "orchid-wallet-android",
+      "build": "4.8.1",
+      "source": "gitlab-ci",
+      "completed_at": "2026-06-03T11:42:00Z",
+      "analysis": [
+        "static",
+        "dynamic"
+      ],
+      "notes": ""
+    },
+    {
+      "scan_id": "S-1102",
+      "app": "orchid-wallet-ios",
+      "build": "4.8.1 (App Store-encrypted IPA)",
+      "source": "gitlab-ci",
+      "completed_at": "2026-06-04T15:20:00Z",
+      "analysis": [
+        "static"
+      ],
+      "notes": "Dynamic analysis skipped: IPA is App Store-encrypted"
+    },
+    {
+      "scan_id": "S-1103",
+      "app": "orchid-portal-web",
+      "target": "https://portal.orchid.test",
+      "source": "dashboard",
+      "completed_at": "2026-06-05T13:05:00Z",
+      "analysis": [
+        "dynamic"
+      ],
+      "authenticated": false,
+      "pages_crawled": 63,
+      "authenticated_pages": 0,
+      "scope_excludes": [],
+      "notes": "Login sequence stopped at MFA prompt; scan continued unauthenticated"
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "R1-001",
+      "fingerprint": "and-1a01",
+      "app": "orchid-wallet-android",
+      "analysis": "static",
+      "severity": "high",
+      "title": "Hard-coded API key in app resources",
+      "location": "res/values/strings.xml: payments_api_key",
+      "status": "open",
+      "triage_note": "",
+      "jira_key": "ORC-11"
+    },
+    {
+      "finding_id": "R1-002",
+      "fingerprint": "and-1a02",
+      "app": "orchid-wallet-android",
+      "analysis": "static",
+      "severity": "critical",
+      "title": "Exported activity reachable by deep link without authentication",
+      "location": "com.orchid.pay.ConfirmActivity",
+      "status": "confirmed",
+      "triage_note": "Reproduced by Orchid AppSec on build 4.8.1",
+      "jira_key": "ORC-12"
+    },
+    {
+      "finding_id": "R1-003",
+      "fingerprint": "and-1a03",
+      "app": "orchid-wallet-android",
+      "analysis": "dynamic",
+      "severity": "high",
+      "title": "Cleartext HTTP traffic observed",
+      "location": "http://metrics.orchid.test/v1/beacon",
+      "status": "open",
+      "triage_note": "",
+      "jira_key": null
+    },
+    {
+      "finding_id": "R1-004",
+      "fingerprint": "and-1a04",
+      "app": "orchid-wallet-android",
+      "analysis": "static",
+      "severity": "medium",
+      "title": "WebView exposes JavaScript interface",
+      "location": "com.orchid.pay.help.HelpWebView",
+      "status": "open",
+      "triage_note": "",
+      "jira_key": null
+    },
+    {
+      "finding_id": "R1-005",
+      "fingerprint": "and-1a05",
+      "app": "orchid-wallet-android",
+      "analysis": "dynamic",
+      "severity": "medium",
+      "title": "Session token written to device log",
+      "location": "logcat tag OrchidAuth",
+      "status": "open",
+      "triage_note": "",
+      "jira_key": null
+    },
+    {
+      "finding_id": "R1-006",
+      "fingerprint": "and-1a05",
+      "app": "orchid-wallet-android",
+      "analysis": "dynamic",
+      "severity": "medium",
+      "title": "Session token written to device log",
+      "location": "logcat tag OrchidAuth (second occurrence: logcat tag OrchidAuthRefresh)",
+      "status": "open",
+      "triage_note": "",
+      "jira_key": null
+    },
+    {
+      "finding_id": "R1-007",
+      "fingerprint": "and-1a06",
+      "app": "orchid-wallet-android",
+      "analysis": "static",
+      "severity": "low",
+      "title": "Application allows Android backup",
+      "location": "AndroidManifest.xml: allowBackup=true",
+      "status": "open",
+      "triage_note": "",
+      "jira_key": null
+    },
+    {
+      "finding_id": "R1-008",
+      "fingerprint": "and-1a07",
+      "app": "orchid-wallet-android",
+      "analysis": "static",
+      "severity": "high",
+      "title": "Third-party library with known vulnerability",
+      "location": "okhttp 3.12.0 (dependency)",
+      "status": "open",
+      "triage_note": "",
+      "jira_key": null
+    },
+    {
+      "finding_id": "R1-009",
+      "fingerprint": "ios-1c01",
+      "app": "orchid-wallet-ios",
+      "analysis": "static",
+      "severity": "high",
+      "title": "App Transport Security allows arbitrary loads",
+      "location": "Info.plist: NSAllowsArbitraryLoads=true",
+      "status": "open",
+      "triage_note": "",
+      "jira_key": null
+    },
+    {
+      "finding_id": "R1-010",
+      "fingerprint": "ios-1c02",
+      "app": "orchid-wallet-ios",
+      "analysis": "static",
+      "severity": "medium",
+      "title": "Keychain item accessible when device is locked",
+      "location": "AuthStore.swift: kSecAttrAccessibleAlways",
+      "status": "confirmed",
+      "triage_note": "Confirmed by Orchid AppSec",
+      "jira_key": null
+    },
+    {
+      "finding_id": "R1-011",
+      "fingerprint": "ios-1c03",
+      "app": "orchid-wallet-ios",
+      "analysis": "static",
+      "severity": "low",
+      "title": "No jailbreak detection",
+      "location": "binary-wide",
+      "status": "open",
+      "triage_note": "",
+      "jira_key": null
+    },
+    {
+      "finding_id": "R1-012",
+      "fingerprint": "ios-1c04",
+      "app": "orchid-wallet-ios",
+      "analysis": "static",
+      "severity": "medium",
+      "title": "Third-party SDK with known vulnerability",
+      "location": "AnalyticsKit 2.1.4 (dependency)",
+      "status": "open",
+      "triage_note": "",
+      "jira_key": null
+    },
+    {
+      "finding_id": "R1-013",
+      "fingerprint": "ios-1c05",
+      "app": "orchid-wallet-ios",
+      "analysis": "static",
+      "severity": "high",
+      "title": "Hard-coded secret in Info.plist",
+      "location": "Info.plist: StripePublishableKey",
+      "status": "false_positive",
+      "triage_note": "Publishable key is public by design",
+      "jira_key": null
+    },
+    {
+      "finding_id": "R1-014",
+      "fingerprint": "web-1d01",
+      "app": "orchid-portal-web",
+      "analysis": "dynamic",
+      "severity": "medium",
+      "title": "Strict-Transport-Security header missing",
+      "location": "https://portal.orchid.test/",
+      "status": "open",
+      "triage_note": "",
+      "jira_key": null
+    },
+    {
+      "finding_id": "R1-015",
+      "fingerprint": "web-1d02",
+      "app": "orchid-portal-web",
+      "analysis": "dynamic",
+      "severity": "high",
+      "title": "Reflected cross-site scripting",
+      "location": "https://portal.orchid.test/search?q=",
+      "status": "confirmed",
+      "triage_note": "Reproduced by Orchid AppSec",
+      "jira_key": null
+    },
+    {
+      "finding_id": "R1-016",
+      "fingerprint": "web-1d03",
+      "app": "orchid-portal-web",
+      "analysis": "dynamic",
+      "severity": "medium",
+      "title": "Outdated JavaScript library",
+      "location": "https://portal.orchid.test/legacy/help (jquery 1.12.4)",
+      "status": "open",
+      "triage_note": "",
+      "jira_key": null
+    },
+    {
+      "finding_id": "R1-017",
+      "fingerprint": "web-1d04",
+      "app": "orchid-portal-web",
+      "analysis": "dynamic",
+      "severity": "low",
+      "title": "Cookie without SameSite attribute",
+      "location": "https://portal.orchid.test/ (cookie: locale)",
+      "status": "open",
+      "triage_note": "",
+      "jira_key": null
+    }
+  ]
+}

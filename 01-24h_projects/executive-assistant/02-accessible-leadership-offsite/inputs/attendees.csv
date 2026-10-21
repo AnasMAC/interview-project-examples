@@ -1,0 +1,9 @@
+attendee_id,name,role,origin,needs,availability
+A01,Mira,CEO,Local,None,Full day
+A02,Ren,CFO,Local,None,Full day
+A03,Hana,Ops,Local,None,Full day
+A04,Jo,People,Local,None,Full day
+A05,Omar,Sales,Local,None,Full day
+A06,Tess,Engineering,Rail North,Nut allergy,Full day if rail R1
+A07,Ana,Customer Success,Rail East,Wheelchair user;step-free transport,Full day if rail R2
+A08,Ben,Product,Flight South,Vegetarian,Previous-day travel allowed

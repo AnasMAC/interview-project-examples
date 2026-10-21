@@ -1,0 +1,6 @@
+import_id,source_record_id,cohort_date,campaign,sessions,cta_starts,valid_requests,qualified_requests,spend,currency,tracking_status
+J01,A03,2026-09-07,search,120,24,12,6,90,EUR,ok
+J02,A04,2026-09-08,search,100,20,10,5,60,EUR,ok
+J03,B04,2026-09-08,newsletter,100,25,10,6,25,EUR,ok
+J04,B05,2026-09-09,newsletter,60,0,0,0,15,EUR,ok
+J05,X02,2026-09-09,search,20,5,3,2,10,USD,ok

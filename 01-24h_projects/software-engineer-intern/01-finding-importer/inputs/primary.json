@@ -1,0 +1,99 @@
+{
+  "tenant": "north",
+  "assets": [
+    "api",
+    "portal"
+  ],
+  "records": [
+    {
+      "source_id": "r1",
+      "tenant": "north",
+      "asset_id": "api",
+      "rule_id": "auth",
+      "location": "https://api.example.test/login",
+      "severity": "HIGH",
+      "evidence": "missing check"
+    },
+    {
+      "source_id": "r2",
+      "tenant": "north",
+      "asset_id": "api",
+      "rule_id": "auth",
+      "location": "https://api.example.test/login",
+      "severity": " critical ",
+      "evidence": "reproduced"
+    },
+    {
+      "source_id": "r3",
+      "tenant": "north",
+      "asset_id": "portal",
+      "rule_id": "tls",
+      "location": "https://portal.example.test:443/",
+      "severity": "low",
+      "evidence": "legacy config"
+    },
+    {
+      "source_id": "r4",
+      "tenant": "north",
+      "asset_id": "api",
+      "rule_id": "debug",
+      "location": "/debug",
+      "severity": "medium",
+      "evidence": "  "
+    },
+    {
+      "source_id": "r5",
+      "tenant": "north",
+      "asset_id": "api",
+      "rule_id": "rate",
+      "location": "/rate",
+      "severity": "urgent",
+      "evidence": "sample"
+    },
+    {
+      "source_id": "r6",
+      "tenant": "north",
+      "asset_id": "ghost",
+      "rule_id": "auth",
+      "location": "/",
+      "severity": "high",
+      "evidence": "sample"
+    },
+    {
+      "source_id": "r7",
+      "tenant": "south",
+      "asset_id": "api",
+      "rule_id": "auth",
+      "location": "/",
+      "severity": "high",
+      "evidence": "private sample"
+    },
+    {
+      "source_id": "r8",
+      "tenant": "north",
+      "asset_id": "api",
+      "rule_id": "",
+      "location": "/",
+      "severity": "low",
+      "evidence": "sample"
+    },
+    {
+      "source_id": "r9",
+      "tenant": "north",
+      "asset_id": " api ",
+      "rule_id": "headers",
+      "location": "https://api.example.test/",
+      "severity": "MEDIUM",
+      "evidence": "no header"
+    },
+    {
+      "source_id": "r10",
+      "tenant": "north",
+      "asset_id": "portal",
+      "rule_id": "tls",
+      "location": "https://portal.example.test:443/",
+      "severity": "medium",
+      "evidence": "verified"
+    }
+  ]
+}

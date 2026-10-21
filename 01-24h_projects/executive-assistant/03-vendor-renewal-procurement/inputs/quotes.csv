@@ -1,0 +1,4 @@
+vendor_id,vendor,monthly_eur_per_seat,minimum_billed_seats,setup_eur,annual_csv_export_eur,term_months,quote_valid_until
+Q1,Cirrus Records,16,20,0,120,12,2027-03-17T17:00:00+01:00
+Q2,Nova Minutes,13,30,300,180,12,2027-03-19T17:00:00+01:00
+Q3,Spruce Notes,12,24,480,0,12,2027-03-19T17:00:00+01:00

@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "suppressions": [
+    {
+      "tool": "brackish",
+      "rule": "BRK-SECRET-004",
+      "path": "tests/fixtures/**",
+      "reason": "Test card numbers and dummy gateway keys used by the refund tests; not real credentials",
+      "ticket": "SEC-214",
+      "added_by": "mrojas"
+    },
+    {
+      "path": "vendor/",
+      "reason": "Vendored payment-gateway SDK, reviewed on every upgrade; its dependencies are covered by Depwarden",
+      "ticket": "SEC-188",
+      "added_by": "praman"
+    },
+    {
+      "tool": "depwarden",
+      "rule": "DWA-2026-0142",
+      "reason": "Only reachable through the XML statement import, which checkout-api disables; upgrade planned with the Q4 framework bump",
+      "expires": "2026-12-31",
+      "ticket": "SEC-301",
+      "added_by": "hsato"
+    }
+  ]
+}

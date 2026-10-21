@@ -1,0 +1,179 @@
+{
+  "$schema": "https://docs.oasis-open.org/sarif/sarif/v2.1.0/errata01/os/schemas/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Thistle",
+          "version": "4.8.2",
+          "organization": "Thistle Static Analysis",
+          "rules": [
+            {
+              "id": "TH-INJ-SQL",
+              "shortDescription": {
+                "text": "Tainted data reaches a SQL string"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "cwe": "CWE-89",
+                "category": "security"
+              }
+            },
+            {
+              "id": "TH-NET-SSRF",
+              "shortDescription": {
+                "text": "Server-side request to a tainted URL"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "cwe": "CWE-918",
+                "category": "security"
+              }
+            },
+            {
+              "id": "TH-CRYPTO-KEY",
+              "shortDescription": {
+                "text": "Cryptographic key or API secret in source"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "cwe": "CWE-321",
+                "category": "security"
+              }
+            },
+            {
+              "id": "TH-REDIRECT-OPEN",
+              "shortDescription": {
+                "text": "Redirect target taken from the request"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "properties": {
+                "cwe": "CWE-601",
+                "category": "security"
+              }
+            }
+          ]
+        }
+      },
+      "columnKind": "utf16CodeUnits",
+      "versionControlProvenance": [
+        {
+          "repositoryUri": "https://git.fernwick.example.test/payments/checkout-api",
+          "revisionId": "28e5dc98f2bb9209ec5ca7ffd446ad1baab7a2a5"
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "TH-INJ-SQL",
+          "level": "error",
+          "message": {
+            "text": "request.args['order_id'] flows into a SQL string"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/payments/refunds.py",
+                  "uriBaseId": "WORKSPACE"
+                },
+                "region": {
+                  "startLine": 42,
+                  "startColumn": 8
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "thistle/v1": "5aaa8a0bf9038d99f134515f776574a9"
+          }
+        },
+        {
+          "ruleId": "TH-NET-SSRF",
+          "level": "error",
+          "message": {
+            "text": "merchant.callback_url flows into urlopen()"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/payments/webhooks.py",
+                  "uriBaseId": "WORKSPACE"
+                },
+                "region": {
+                  "startLine": 63,
+                  "startColumn": 15
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "thistle/v1": "5e78749f420b29f3068fbd9641cce208"
+          }
+        },
+        {
+          "ruleId": "TH-CRYPTO-KEY",
+          "level": "error",
+          "message": {
+            "text": "PSP_API_KEY looks like a live secret"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/checkout/settings.py",
+                  "uriBaseId": "WORKSPACE"
+                },
+                "region": {
+                  "startLine": 27,
+                  "startColumn": 0
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "thistle/v1": "7caf1cf858a64121e83ade16c0a6df2f"
+          }
+        },
+        {
+          "ruleId": "TH-REDIRECT-OPEN",
+          "level": "warning",
+          "message": {
+            "text": "request.args['next'] flows into redirect()"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/checkout/api/orders.py",
+                  "uriBaseId": "WORKSPACE"
+                },
+                "region": {
+                  "startLine": 120,
+                  "startColumn": 15
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "thistle/v1": "b5b43b2000f1bd4ed2aef185bdf03b86"
+          }
+        }
+      ],
+      "originalUriBaseIds": {
+        "WORKSPACE": {
+          "uri": "file:///builds/payments/checkout-api/"
+        }
+      }
+    }
+  ]
+}

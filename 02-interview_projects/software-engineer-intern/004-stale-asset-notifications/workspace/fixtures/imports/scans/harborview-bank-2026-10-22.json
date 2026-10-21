@@ -1,0 +1,65 @@
+{
+  "scanner": {"name": "periscope", "version": "4.2.0"},
+  "scan": {
+    "id": "psc-hvb-20261022-0300", "profile": "external-weekly",
+    "started_at": "2026-10-22T07:00:04Z", "finished_at": "2026-10-22T07:41:37Z"
+  },
+  "hosts": [
+    {
+      "address": "198.51.100.10", "state": "up",
+      "hostnames": [{"name": "web-lb.harborview-bank.example.test", "source": "target"}],
+      "ports": [
+        {"port": 443, "protocol": "tcp", "state": "open",
+         "service": {"name": "http", "tunnel": "ssl", "product": "nginx", "version": "1.26.2"}},
+        {"port": 80, "protocol": "tcp", "state": "closed"}
+      ]
+    },
+    {
+      "address": "198.51.100.11", "state": "up",
+      "hostnames": [{"name": "web-lb.harborview-bank.example.test", "source": "target"}],
+      "ports": [
+        {"port": 443, "protocol": "tcp", "state": "open",
+         "service": {"name": "http", "tunnel": "ssl", "product": "nginx", "version": "1.26.2"}}
+      ]
+    },
+    {
+      "address": "198.51.100.20", "state": "up",
+      "hostnames": [
+        {"name": "online.harborview-bank.example.test", "source": "target"},
+        {"name": "hvb-online-web-01.ca-central-2.compute.nimbus.example.test", "source": "ptr"}
+      ],
+      "ports": [
+        {"port": 443, "protocol": "tcp", "state": "open",
+         "service": {"name": "http", "tunnel": "ssl", "product": "Harborview Online", "banner": "HTTP/1.1 302 Found\r\nLocation: /login\r\nServer: hvb-edge"}},
+        {"port": 80, "protocol": "tcp", "state": "open",
+         "service": {"name": "http", "product": "hvb-edge", "banner": "HTTP/1.1 301 Moved Permanently\r\nLocation: https://online.harborview-bank.example.test/"}}
+      ]
+    },
+    {
+      "address": "198.51.100.21", "state": "up",
+      "hostnames": [{"name": "api.harborview-bank.example.test", "source": "target"}],
+      "ports": [
+        {"port": 443, "protocol": "tcp", "state": "open",
+         "service": {"name": "http", "tunnel": "ssl", "product": "Nimbus Load Balancer"}}
+      ]
+    },
+    {
+      "address": "198.51.100.30", "state": "up",
+      "hostnames": [{"name": "vpn.harborview-bank.example.test", "source": "target"}],
+      "ports": [
+        {"port": 443, "protocol": "tcp", "state": "open",
+         "service": {"name": "http", "tunnel": "ssl", "product": "Ironpass SSL VPN", "version": "9.1R18"}},
+        {"port": 22, "protocol": "tcp", "state": "open",
+         "service": {"name": "ssh", "product": "OpenSSH", "version": "9.6p1", "banner": "SSH-2.0-OpenSSH_9.6"}},
+        {"port": 500, "protocol": "udp", "state": "open",
+         "service": {"name": "isakmp"}},
+        {"port": 4500, "protocol": "udp", "state": "open|filtered"}
+      ]
+    },
+    {
+      "address": "198.51.100.40", "state": "down",
+      "hostnames": [{"name": "beta-online.harborview-bank.example.test", "source": "target"}],
+      "ports": []
+    }
+  ]
+}

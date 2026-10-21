@@ -1,0 +1,6 @@
+# Development and test dependencies. Install together with requirements.txt:
+#   .venv/bin/pip install -r requirements.txt -r requirements-dev.txt
+-r requirements.txt
+pytest==8.3.4
+pytest-cov==6.0.0
+ruff==0.8.4

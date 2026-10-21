@@ -1,0 +1,41 @@
+{% extends "admin/base.html" %}
+{% block title %}Tickets{% endblock %}
+{% block content %}
+<h1>Tickets</h1>
+<form method="get" action="/admin/tickets">
+  <label for="status">Status</label>
+  <select id="status" name="status">
+    <option value="">any</option>
+    {% for value in statuses|default(["new", "open", "pending", "solved", "closed"]) %}
+    <option value="{{ value }}"{% if value == selected_status|default('') %} selected{% endif %}>{{ value }}</option>
+    {% endfor %}
+  </select>
+  <label for="priority">Priority</label>
+  <select id="priority" name="priority">
+    <option value="">any</option>
+    {% for value in priorities|default(["low", "normal", "high", "urgent"]) %}
+    <option value="{{ value }}"{% if value == selected_priority|default('') %} selected{% endif %}>{{ value }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit">Filter</button>
+</form>
+<table>
+  <thead>
+    <tr><th>Number</th><th>Subject</th><th>Customer</th><th>Staff</th><th>Status</th><th>Priority</th><th>Updated</th></tr>
+  </thead>
+  <tbody>
+    {% for ticket in tickets|default([]) %}
+    <tr>
+      <td><a href="/admin/tickets/{{ ticket.id }}">{{ ticket.number }}</a></td>
+      <td>{{ ticket.subject }}</td>
+      <td>{{ ticket.requester.name|default('-') }}</td>
+      <td>{{ ticket.assignee.name|default('-') }}</td>
+      <td>{{ ticket.status }}</td>
+      <td>{{ ticket.priority }}</td>
+      <td>{{ ticket.updated_at }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<p class="meta">{{ tickets|default([])|length }} ticket(s) shown.</p>
+{% endblock %}

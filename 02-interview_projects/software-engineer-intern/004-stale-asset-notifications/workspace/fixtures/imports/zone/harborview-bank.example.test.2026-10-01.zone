@@ -1,0 +1,37 @@
+; harborview-bank.example.test -- public zone
+; Exported from the Harborview Bank DNS console for Atlas, 2026-10-01.
+; Maintainer: netops@harborview-bank.example.test
+$ORIGIN harborview-bank.example.test.
+$TTL 3600
+@           IN SOA  ns1.harborview-bank.example.test. hostmaster.harborview-bank.example.test. (
+                    2026100101 ; serial
+                    7200       ; refresh
+                    900        ; retry
+                    1209600    ; expire
+                    300 )      ; negative caching TTL
+            IN NS   ns1
+            IN NS   ns2
+            IN MX   10 mx1
+            IN MX   20 mx2
+            IN TXT  "v=spf1 mx ip4:198.51.100.0/27 -all"
+            IN A    198.51.100.10
+
+ns1         IN A    198.51.100.2
+ns2         IN A    203.0.113.2
+mx1         IN A    198.51.100.25
+mx2   300   IN A    203.0.113.25
+
+; web front door
+www         IN CNAME web-lb
+web-lb      IN A    198.51.100.10
+            IN A    198.51.100.11
+online      IN A    198.51.100.20   ; online banking
+beta-online IN A    198.51.100.40   ; pilot, to be removed after go-live
+api         IN A    198.51.100.22
+vpn         IN A    198.51.100.30
+statements  IN CNAME online
+
+; marketing
+promo-2025  IN CNAME harborview-promo.landingly.example.test.   ; spring 2025 campaign (agency page)
+
+_dmarc      IN TXT  "v=DMARC1; p=reject; rua=mailto:dmarc@harborview-bank.example.test"

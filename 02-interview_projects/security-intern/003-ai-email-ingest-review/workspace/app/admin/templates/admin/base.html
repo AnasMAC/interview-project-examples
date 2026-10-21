@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Console{% endblock %} - Bellpost</title>
+  <style>
+    :root { color-scheme: light; }
+    body { margin: 0; font: 15px/1.45 system-ui, sans-serif; color: #1d2329; background: #f4f6f8; }
+    header { display: flex; align-items: center; gap: 1.25rem; padding: .75rem 1.25rem; background: #16232f; color: #eef3f7; }
+    header .brand { font-weight: 600; color: #fff; text-decoration: none; }
+    header nav { display: flex; gap: .9rem; flex: 1; }
+    header nav a { color: #cdd9e3; text-decoration: none; }
+    header nav a:hover { color: #fff; }
+    main { max-width: 68rem; margin: 1.5rem auto; padding: 0 1.25rem; }
+    table { width: 100%; border-collapse: collapse; background: #fff; }
+    th, td { padding: .45rem .6rem; border-bottom: 1px solid #e3e8ec; text-align: left; }
+    th { background: #eef3f7; font-weight: 600; }
+    .meta { color: #5b6b7a; }
+    .tz { font-size: .8em; text-transform: uppercase; letter-spacing: .06em; color: #5b6b7a; }
+    .flashes { list-style: none; padding: .6rem .8rem; background: #fff7d6; border: 1px solid #e6d38a; }
+    footer { max-width: 68rem; margin: 2rem auto; padding: 0 1.25rem; color: #5b6b7a; font-size: .85em; }
+    form.inline { display: inline; }
+  </style>
+</head>
+<body>
+<header>
+  <a class="brand" href="/admin/">Bellpost</a>
+  <nav>
+    <a href="/admin/tickets">Tickets</a>
+    <a href="/admin/users">Users</a>
+    <a href="/admin/webhooks">Webhooks</a>
+    <a href="/admin/reports">Reports</a>
+    <a href="/admin/activity">Activity</a>
+    <a href="/admin/tenants/settings">Settings</a>
+    <a href="/admin/search">Classic search</a>
+  </nav>
+  <form method="post" action="/admin/logout">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <button type="submit">Sign out</button>
+  </form>
+</header>
+<main>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul class="flashes">
+        {% for category, message in messages %}<li class="{{ category }}">{{ message }}</li>{% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</main>
+<footer>
+  <span>Bellpost {{ app_version }}</span>
+  {% if tenant is defined %}<span class="meta"> - {{ tenant.name|default('') }} ({{ tenant.timezone|default('UTC') }})</span>{% endif %}
+</footer>
+</body>
+</html>

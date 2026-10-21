@@ -1,0 +1,116 @@
+{
+  "scanner": "Larkspur SAST 4.2.0",
+  "scan_started": "2026-05-11T08:15:20Z",
+  "scan_finished": "2026-05-11T08:19:44Z",
+  "target": "glasswick/bellpost@main",
+  "ruleset": "extended-security-py-v4",
+  "summary": {
+    "total_findings": 10,
+    "critical": 2,
+    "high": 4,
+    "medium": 3,
+    "low": 1
+  },
+  "findings": [
+    {
+      "id": "LKS-4201",
+      "rule": "py/sql-string-building",
+      "severity": "high",
+      "confidence": "high",
+      "file": "app/legacy/ticket_search.py",
+      "line": 27,
+      "evidence": "sql = f\"SELECT id, tenant_id, subject, status FROM tickets WHERE tenant_id = {tenant.id} AND (subject LIKE '%{query}%' OR body LIKE '%{query}%') LIMIT {limit}\"",
+      "note": "Query built with direct f-string formatting interpolating unsanitized user query parameter"
+    },
+    {
+      "id": "LKS-4202",
+      "rule": "py/unsafe-yaml-load",
+      "severity": "critical",
+      "confidence": "high",
+      "file": "app/admin/settings_import.py",
+      "line": 35,
+      "evidence": "data = yaml.load(document, Loader=yaml.Loader)",
+      "note": "Arbitrary object instantiation via unsafe PyYAML Loader in tenant settings import"
+    },
+    {
+      "id": "LKS-4203",
+      "rule": "py/path-traversal-attachment",
+      "severity": "high",
+      "confidence": "high",
+      "file": "app/attachments/download.py",
+      "line": 36,
+      "evidence": "file_path = os.path.join(settings.attachment_dir, attachment.filename)",
+      "note": "Attachment file path resolved without directory boundary traversal validation"
+    },
+    {
+      "id": "LKS-4204",
+      "rule": "secret/hardcoded",
+      "severity": "high",
+      "confidence": "medium",
+      "file": "seed/generate.py",
+      "line": 56,
+      "evidence": "\"DEMO-bpk-brp-agent-0001\"",
+      "note": "Static API key pattern detected in seed generation module (Refuted: deterministic demo fixtures)"
+    },
+    {
+      "id": "LKS-4205",
+      "rule": "py/timing-attack-comparison",
+      "severity": "medium",
+      "confidence": "medium",
+      "file": "app/auth/csrf.py",
+      "line": 51,
+      "evidence": "return hmac.compare_digest(stored, submitted)",
+      "note": "Scanner flagged string equality check (Refuted: hmac.compare_digest implements constant-time comparison)"
+    },
+    {
+      "id": "LKS-4206",
+      "rule": "secret/hardcoded-env",
+      "severity": "high",
+      "confidence": "high",
+      "file": "config/.env.2019.bak",
+      "line": 14,
+      "evidence": "HELPDESK_SMTP_PASSWORD=DEMO-helpdesk-smtp-password",
+      "note": "Archived configuration file flagged as active production secret (Refuted: historical demo credentials)"
+    },
+    {
+      "id": "LKS-4207",
+      "rule": "py/command-injection-pattern",
+      "severity": "critical",
+      "confidence": "low",
+      "file": "tests/fixtures/scanner_noise/payload_strings.py",
+      "line": 12,
+      "evidence": "SHELL_PAYLOADS = ['os.system(...)', 'subprocess.check_output(...)']",
+      "note": "Command injection pattern detected (Refuted: synthetic payload strings in test fixture)"
+    },
+    {
+      "id": "LKS-4208",
+      "rule": "py/sql-string-concatenation",
+      "severity": "medium",
+      "confidence": "high",
+      "file": "tools/csv-import/import_legacy.py",
+      "line": 1,
+      "evidence": "One-off importer for the 2023 helpdesk export (archived)",
+      "note": "Raw SQL in archived legacy script; explicitly retired and out of scope for Bellpost v1.5"
+    },
+    {
+      "id": "LKS-4209",
+      "rule": "secret/base64-entropy-blob",
+      "severity": "medium",
+      "confidence": "low",
+      "file": "tests/fixtures/scanner_noise/legacy_export_excerpt.txt",
+      "line": 11,
+      "evidence": "QlVORExFX0JMT0JfREVNT19D",
+      "note": "High-entropy base64 string flagged by entropy heuristic (Decoy: synthetic noise artifact)"
+    },
+    {
+      "id": "LKS-4210",
+      "rule": "py/insecure-temp-file",
+      "severity": "low",
+      "confidence": "low",
+      "file": "tools/mockhook/server.py",
+      "line": 1,
+      "evidence": "var/mockhook/deliveries.jsonl",
+      "note": "Unrestricted file write path in mockhook test double; local test tool only"
+    }
+  ]
+}
